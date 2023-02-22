@@ -1,9 +1,10 @@
+const client = require("./client")
 const {
-    client,
-    // declare your model imports here
-    // for example, User
-  } = require('./');
-  
+    createUser,
+    createReview,
+    
+} = require('./')
+
   async function dropTables() {
     try {
       client.connect();
