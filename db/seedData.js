@@ -2,7 +2,6 @@ const client = require("./client")
 const {
     createUser,
     createReview,
-    
 } = require('./')
 
   async function dropTables() {
