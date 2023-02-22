@@ -44,15 +44,15 @@ router.use(async (req, res, next) => {
 const usersRouter = require('./users');
 router.use('/users', usersRouter);
 
-// ROUTER: /api/activities
+// ROUTER: /api/products
 const productsRouter = require('./products');
 router.use('/products', productsRouter);
 
-// ROUTER: /api/routines
+// ROUTER: /api/orders
 const ordersRouter = require('./orders');
 router.use('/orders', ordersRouter);
 
-// ROUTER: /api/routine_activities
+// ROUTER: /api/reviews
 const reviewsRouter = require('./reviews');
 router.use('/reviews', reviewsRouter);
 

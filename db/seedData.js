@@ -2,9 +2,9 @@ const client = require("./client")
 
 // ! remember to destructure your DB adapter functions here so we can use them to seed the DB 
 const {createUser} = require('./users');
-const {} = require('./products');
+const {createProduct} = require('./products');
 const {createReview} = require('./reviews');
-const {} = require('./orders')
+const {addProductToOrder} = require('./orders')
 const {fruitVegProductsToCreate} = require('./productSeedArrays/fruitVegSeed.js')
 const {dairyProductsToCreate} = require('./productSeedArrays/dairySeed.js')
 const {meatSeafoodProductsToCreate} = require('./productSeedArrays/meatSeafoodSeed.js')
@@ -128,10 +128,10 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
     try {
       console.log("Starting to create products...")
   
-      const bakeryProducts = await Promise.all(bakeryProductsToCreate.map())
-      const meatSeafoodProducts = await Promise.all(meatSeafoodProductsToCreate.map())
-      const dairyProducts = await Promise.all(dairyProductsToCreate.map())
-      const fruitVegProducts = await Promise.all(fruitVegProductsToCreate.map())
+      const bakeryProducts = await Promise.all(bakeryProductsToCreate.map(createProduct))
+      const meatSeafoodProducts = await Promise.all(meatSeafoodProductsToCreate.map(createProduct))
+      const dairyProducts = await Promise.all(dairyProductsToCreate.map(createProduct))
+      const fruitVegProducts = await Promise.all(fruitVegProductsToCreate.map(createProduct))
 
       console.log("🚀 ~ file: seedData.js ~ createInitialProducts ~ bakeryProducts created:", bakeryProducts)
       console.log("🚀 ~ file: seedData.js ~ createInitialProducts ~ meatSeafoodProducts created:", meatSeafoodProducts)
@@ -222,7 +222,7 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
         },
 
       ]
-      const orders = await Promise.all(ordersToCreate.map())
+      const orders = await Promise.all(ordersToCreate.map(addProductToOrder))
       
       console.log("🚀 ~ file: seedData.js ~ createInitialReviews ~ orders:", orders)
       console.log("Finished creating orders!")
