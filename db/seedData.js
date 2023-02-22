@@ -1,16 +1,15 @@
 const client = require("./client")
 
 // ! remember to destructure your DB adapter functions here so we can use them to seed the DB 
-const {} = require('./users');
+const {createUser} = require('./users');
 const {} = require('./products');
-const {} = require('./reviews');
+const {createReview} = require('./reviews');
 const {} = require('./orders')
 const {fruitVegProductsToCreate} = require('./productSeedArrays/fruitVegSeed.js')
 const {dairyProductsToCreate} = require('./productSeedArrays/dairySeed.js')
 const {meatSeafoodProductsToCreate} = require('./productSeedArrays/meatSeafoodSeed.js')
 const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
 
-  
   async function dropTables() {
     try {
       client.connect();

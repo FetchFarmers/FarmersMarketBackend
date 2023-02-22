@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
 const { JWT_SECRET } = process.env;
@@ -78,3 +79,4 @@ router.use((err, req, res, next) => {
 });
 
 module.exports = router;
+
