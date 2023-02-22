@@ -1,20 +1,34 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const { Pool } = require('pg');
-
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production'
+const client = require('./db/client');
+client.connect();
+
+const morgan = require('morgan');
+app.use(morgan('dev'));
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+
+const cors = require('cors');
+app.use(cors({
+  origin: "*",
+}))
+
+app.use((req, res, next) => {
+  console.log("<____Body Logger START____>");
+  console.log(req.body);
+  console.log("<_____Body Logger END_____>");
+
+  next();
 });
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+const apiRouter = require('./api');
+app.use('/api', apiRouter);
+
+module.exports = app;
