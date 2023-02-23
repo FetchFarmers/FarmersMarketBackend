@@ -61,7 +61,7 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       "checkoutSum" DECIMAL (10,2)
     );
   
-    CREATE TABLE orderProducts (
+    CREATE TABLE order_products (
       id SERIAL PRIMARY KEY,
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id),
