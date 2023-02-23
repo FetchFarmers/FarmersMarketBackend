@@ -58,7 +58,7 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       "userId" INTEGER REFERENCES users(id),
       "checkoutDate" VARCHAR(255), 
       "isCheckedOut" BOOLEAN DEFAULT false, 
-      "checkoutSum" DECIMAL (10,2), 
+      "checkoutSum" DECIMAL (10,2)
     );
   
     CREATE TABLE orderProducts (
