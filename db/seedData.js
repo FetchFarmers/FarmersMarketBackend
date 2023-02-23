@@ -68,7 +68,7 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       quantity" INTEGER NOT NULL,
       "checkoutPrice" DECIMAL (10,2), 
       UNIQUE ("orderId", "productId"),
-    )
+    );
 
     CREATE TABLE reviews (
       id SERIAL PRIMARY KEY,
@@ -78,7 +78,8 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       details VARCHAR(2000) NOT NULL,
       "starRating" INTEGER NOT NULL,
       UNIQUE ("userId", "productId"),
-    )
+    );
+
   `);
   
       console.log("Finished building tables!");
