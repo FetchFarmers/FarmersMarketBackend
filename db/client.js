@@ -1,10 +1,11 @@
 const { Pool } = require('pg');
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production'
+const connectionString = process.env.DATABASE_URL || 'https://localhost:5432/fetch_farm';
+
+const client = new Pool({
+  connectionString,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
 });
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-};
+module.exports = client;
+
