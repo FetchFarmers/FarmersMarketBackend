@@ -49,14 +49,14 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       price DECIMAL (10,2) NOT NULL,
       category VARCHAR(255) NOT NULL,
       "subCategory" VARCHAR(255) NOT NULL,
-      "imageURL" VARCHAR(255) NOT NULL
+      "imageURL" VARCHAR(255) NOT NULL,
     );
 
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       // todo "sessionId" INTEGER, not sure how this would work. Will circle back if time allows
       "userId" INTEGER REFERENCES users(id),
-      "checkoutDate
+      "checkoutDate" VARCHAR(255), 
       "isCheckedOut" BOOLEAN DEFAULT false, 
       "checkoutSum" DECIMAL (10,2), 
     );
@@ -65,9 +65,9 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       id SERIAL PRIMARY KEY,
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id),
-      quantity INTEGER NOT NULL,
+      quantity" INTEGER NOT NULL,
       "checkoutPrice" DECIMAL (10,2), 
-      UNIQUE ("orderId", "productId")
+      UNIQUE ("orderId", "productId"),
     )
 
     CREATE TABLE reviews (
@@ -77,7 +77,7 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       title VARCHAR(255) NOT NULL, 
       details VARCHAR(2000) NOT NULL,
       "starRating" INTEGER NOT NULL,
-      UNIQUE ("userId", "productId")
+      UNIQUE ("userId", "productId"),
     )
   `);
   
