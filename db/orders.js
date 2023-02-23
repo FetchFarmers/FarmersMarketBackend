@@ -75,7 +75,6 @@ async function updateOrderProductQuantity({ id, quantity }) {
   
 }
   
-
 async function destroyOrderProduct(id) {
   
     try {
