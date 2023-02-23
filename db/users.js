@@ -1,5 +1,6 @@
-// grab our db client connection to use with our adapters
+
 const client = require('../client');
+const bcrypt = require('bcrypt');
 
 async function getAllUsers() {
   try {
@@ -27,11 +28,12 @@ async function getUserById(id) {
 async function createUser(userData) {
   const { username, password, email, isAdmin } = userData;
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const { rows: [user] } = await client.query(`
       INSERT INTO users(username, password, email, "isAdmin")
       VALUES($1, $2, $3, $4)
       RETURNING *;
-    `, [username, password, email, isAdmin]);
+    `, [username, hashedPassword, email, isAdmin]);
     return user;
   } catch (error) {
     throw error;
@@ -73,3 +75,7 @@ module.exports = {
   updateUser,
   deleteUser,
 };
+
+
+
+
