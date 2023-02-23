@@ -1,0 +1,28 @@
+const express = require('express');
+const { requireUser } = require('./utils');
+const reviewsRouter = express.Router();
+
+const { 
+    // add in database adapter functions
+} = require('../db');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = reviewsRouter;
