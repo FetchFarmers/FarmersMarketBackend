@@ -65,7 +65,7 @@ const {bakeryProductsToCreate} = require('./productSeedArrays/bakerySeed.js')
       id SERIAL PRIMARY KEY,
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id),
-      quantity" INTEGER NOT NULL,
+      quantity INTEGER NOT NULL,
       "checkoutPrice" DECIMAL (10,2), 
       UNIQUE ("orderId", "productId"),
     );
