@@ -199,7 +199,7 @@ const dairyProductsToCreate = [
   price: 9.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/feta.jpg"
+  imageURL: "https://example.com/grana-padano.jpg"
 },
 {
   name: "Feta", 
