@@ -1,10 +1,13 @@
 const client = require("./client");
 const bcrypt = require("bcrypt");
 
+async function getAllUsers() {
+
 async function createUser({ username, password }) {
   const SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   let userToAdd = { username, hashedPassword };
+
   try {
     const {
       rows: [user],
