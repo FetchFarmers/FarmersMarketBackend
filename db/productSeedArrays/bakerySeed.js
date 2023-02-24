@@ -6,7 +6,7 @@ const bakeryProductsToCreate = [
   price: 6.99,
   category: "Artisan bread",
   subCategory: "Bakery",
-  imageURL: ""
+  imageURL: "https://www.pexels.com/photo/brown-bread-on-white-table-6608542/"
   },
   {
   name: "Apple Pie",
@@ -15,7 +15,7 @@ const bakeryProductsToCreate = [
   price: 19.99,
   category: "Pastries and desserts",
   subCategory: "Bakery",
-  imageURL: ""
+  imageURL: "https://www.pexels.com/photo/brown-pie-on-tray-3223494/"
   },
   {
   name: "Mushroom and Cheese Quiche",
@@ -23,7 +23,7 @@ const bakeryProductsToCreate = [
   inventory: 15,
   price: 8.99,
   category: "Savory baked goods",
-  subCategory: "Bakery",
+  subCategory: "https://www.pexels.com/photo/appetizing-baked-sliced-seafood-pizza-with-mushrooms-4553127/",
   imageURL: ""
   },
   {
@@ -31,7 +31,7 @@ const bakeryProductsToCreate = [
   description: "Our vegan chocolate cupcakes are moist and fluffy, with a rich chocolatey flavor. Perfect for those with dietary restrictions!",
   inventory: 12,
   price: 3.99,
-  category: "Gluten-free and vegan",
+  category: "https://www.pexels.com/photo/delicious-chocolate-cupcakes-15511436/",
   subCategory: "Bakery",
   imageURL: ""
   },
@@ -42,7 +42,7 @@ const bakeryProductsToCreate = [
   price: 1.99,
   category: "Seasonal specialties",
   subCategory: "Bakery",
-  imageURL: ""
+  imageURL: "https://www.pexels.com/photo/brown-star-shaped-cookies-on-white-and-green-leaves-5702985/"
   }
   ]
   
