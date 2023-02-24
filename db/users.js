@@ -19,6 +19,10 @@ async function createUser({ username, password, email, isAdmin }) {
   const SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   let userToAdd = { username, hashedPassword, email, isAdmin };
+  
+  if (!userToAdd.isAdmin){
+    userToAdd.isAdmin = false
+  }
 
   try {
     const {

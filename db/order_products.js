@@ -1,26 +1,5 @@
 const client = require('./client');
 
-  // * should add a now row to order_products to add that product to the specific order
-  async function addProductToOrder({ orderId, productId, quantity}) {
-  
-    try {
-      
-      const {
-        rows: [createdOrderProduct] } = await client.query(
-        `
-          INSERT INTO order_products("orderId", "productId", quantity) 
-          VALUES($1, $2, $3) 
-          RETURNING *;
-        `,
-        [orderId, productId, quantity]
-      );
-  
-      return await createdOrderProduct;
-    } catch (error) {
-      throw error;
-    }
-  }
-  
   // * should get the orderProduct by id
   async function getOrderProductById(id) {
   
@@ -79,8 +58,8 @@ const client = require('./client');
   
   }
 
-    // * should update the checkout price of the order product when the order is checked out 
-  async function updateOrderProductCheckoutPrice({ id, checkoutPrice }) {
+    // * Working as a helper function to checkout order with function checkoutOrder
+  async function updateOrderProductCheckoutPrice( id, checkoutPrice ) {
 
     try {
       
@@ -168,7 +147,6 @@ const client = require('./client');
   }
 
   module.exports = {
-        addProductToOrder,
         getOrderProductById,
         getOrderProductByOrder,
         updateOrderProductQuantity,

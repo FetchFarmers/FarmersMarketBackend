@@ -1,16 +1,19 @@
 const client = require('./client');
+const { updateOrderProductCheckoutPrice } = require('./order_products');
+const { getUserByUsername } = require('./users');
 
 // * will return a new order for the userId provided //
-async function createNewOrder(userId) {
+async function createNewOrder({sessionId, userId}) {
+  
   try {
     const {
       rows: [createdOrder] } = await client.query(
       `
-        INSERT INTO orders("userId") 
-        VALUES($1) 
+        INSERT INTO orders("sessionId", "userId") 
+        VALUES($1, $2) 
         RETURNING *;
       `,
-      [userId]
+      [sessionId, userId]
     );
 
     return await createdOrder;
@@ -28,7 +31,7 @@ async function getOrderById(id) {
       `
         SELECT orders.*, users.username AS "orderCreator" 
         FROM orders
-        JOIN users ON orders."usersId" = users.id
+        JOIN users ON orders."userId" = users.id
         WHERE orders.id=${id};
       `
     );
@@ -102,6 +105,7 @@ async function getAllOpenOrders() {
 
 //* should get current open order with all orderProducts //
 async function getOpenOrdersByUser({ username }) {
+
   try {
 
     const { rows: orderId } = await client.query(
@@ -126,7 +130,7 @@ async function getOpenOrdersByUser({ username }) {
 
 }
 
-//* should get all checkedOut orders for user with all order Products //
+//* manually tested and working to return an array of all closed orders for associated userId with orderProducts
 async function getClosedOrdersByUser({ username }) {
   try {
 
@@ -152,7 +156,7 @@ async function getClosedOrdersByUser({ username }) {
 
 }
 
-//* might be helpful to admins to see how many orders included a specific product
+//* manually tested and working - might be helpful to admins to see how many orders included a specific product
 async function getAllOrdersByproduct({ id }) {
 
   try {
@@ -177,23 +181,27 @@ async function getAllOrdersByproduct({ id }) {
    
 }
 
-//* should update the status of the order upon checkout //
-async function updateOrderStatus({ id, checkoutSum, checkoutDate }) {
+//* manually tested and working - updates the the order to checked out with date and sum and also saves the current price of orderProducts at checkout
+async function checkoutOrder({ id, checkoutSum, checkoutDate }) {
 
   try {
 
     await client.query(
       `
         UPDATE orders
-        SET "checkoutSum"=${ checkoutSum }, 
-        "checkoutDate"=${ checkoutDate },
+        SET "checkoutSum"=$1, 
+        "checkoutDate"=$2,
         "isCheckedOut"=true
         WHERE id=${ id }
         RETURNING *;
-      `
+      `, [checkoutSum, checkoutDate]
     );
     
-  return await getOrderById(id)
+    const orderToUpdate = await getOrderById(id)
+
+    await orderToUpdate.products.map((orderProduct) => { updateOrderProductCheckoutPrice(orderProduct.orderProductId, orderProduct.price)})
+      
+    return await getOrderById(id)
   }catch(error){
     throw error 
   }
@@ -227,6 +235,30 @@ async function destroyOrder(id) {
 
 }
 
+  // todo (kind of working) add a new row to order_products to add that product to the specific order and create a new order if there isn't an existing order
+async function addProductToOrder({orderId, productId, quantity}) {
+  
+  try {
+      
+
+      const { rows: [createdOrderProduct] } = await client.query(
+        `
+          INSERT INTO order_products("orderId", "productId", quantity) 
+          VALUES($1, $2, $3) 
+          RETURNING *;
+        `,
+        [orderId, productId, quantity]
+      );
+
+      return await createdOrderProduct;
+
+    // }
+
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 module.exports = {
 createNewOrder,
@@ -236,6 +268,7 @@ getAllOpenOrders,
 getOpenOrdersByUser,
 getClosedOrdersByUser,
 getAllOrdersByproduct,
-updateOrderStatus,
+checkoutOrder,
 destroyOrder,
+addProductToOrder,
 };
