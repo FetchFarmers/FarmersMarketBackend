@@ -14,22 +14,22 @@ async function getAllUsers() {
   }
 }
 
-async function createUser({ username, password }) {
+async function createUser({ username, password, email, isAdmin = false }) {
   const SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
-  let userToAdd = { username, hashedPassword };
+  let userToAdd = { username, hashedPassword, email, isAdmin };
 
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password) 
-      VALUES($1, $2) 
+      INSERT INTO users(username, password, email, "isAdmin") 
+      VALUES($1, $2, $3, $4) 
       ON CONFLICT (username) DO NOTHING
-      RETURNING id, username;
+      RETURNING id, username, email, "isAdmin";
     `,
-      [userToAdd.username, userToAdd.hashedPassword]
+      [userToAdd.username, userToAdd.hashedPassword, userToAdd.email, userToAdd.isAdmin]
     );
     return user;
   } catch (error) {
