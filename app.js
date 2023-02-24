@@ -28,8 +28,4 @@ app.get('/', (req, res) => {
 const apiRouter = require('./api');
 app.use('/api', apiRouter);
 
-app.listen(5000, () => {
-  console.log("server has started on port 5000")
-});
-
 module.exports = app;

@@ -198,7 +198,8 @@ const dairyProductsToCreate = [
   inventory: 50,
   price: 9.99,
   category: "Dairy",
-  subCategory
+  subCategory: "Cheese",
+  imageURL: "https://example.com/feta.jpg"
 },
 {
   name: "Feta", 
@@ -275,4 +276,4 @@ const dairyProductsToCreate = [
 }
   ]
 
-  module.exports = dairyProductsToCreate
+exports.dairyProductsToCreate = dairyProductsToCreate

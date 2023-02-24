@@ -47,4 +47,4 @@ const meatSeafoodProductsToCreate = [
     }
   ]
 
-  module.exports = meatSeafoodProductsToCreate
+  exports.meatSeafoodProductsToCreate = meatSeafoodProductsToCreate

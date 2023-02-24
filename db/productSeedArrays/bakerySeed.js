@@ -5,8 +5,8 @@ const bakeryProductsToCreate = [
   inventory: 20,
   price: 6.99,
   category: "Artisan bread",
-  subCategory: "Sourdough bread",
-  imageURL: ""
+  subCategory: "Sourdough",
+  imageURL: "https://example.com/bakery.jpg"
   },
   {
   name: "Apple Pie",
@@ -15,7 +15,7 @@ const bakeryProductsToCreate = [
   price: 19.99,
   category: "Pastries and desserts",
   subCategory: "Fruit pies",
-  imageURL: ""
+  imageURL: "https://example.com/bakery.jpg"
   },
   {
   name: "Mushroom and Cheese Quiche",
@@ -24,7 +24,7 @@ const bakeryProductsToCreate = [
   price: 8.99,
   category: "Savory baked goods",
   subCategory: "Quiches",
-  imageURL: ""
+  imageURL: "https://example.com/bakery.jpg"
   },
   {
   name: "Vegan Chocolate Cupcakes",
@@ -33,7 +33,7 @@ const bakeryProductsToCreate = [
   price: 3.99,
   category: "Gluten-free and vegan",
   subCategory: "Vegan cupcakes",
-  imageURL: ""
+  imageURL: "https://example.com/bakery.jpg"
   },
   {
   name: "Gingerbread Cookies",
@@ -42,8 +42,8 @@ const bakeryProductsToCreate = [
   price: 1.99,
   category: "Seasonal specialties",
   subCategory: "Gingerbread cookies",
-  imageURL: ""
+  imageURL: "https://example.com/bakery.jpg"
   }
   ]
   
-  module.exports = bakeryProductsToCreate
+exports.bakeryProductsToCreate = bakeryProductsToCreate
