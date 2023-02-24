@@ -4,8 +4,10 @@ const client = require("./client")
 const {createUser} = require('./users');
 const {createProduct} = require('./products');
 const {createReview} = require('./reviews');
-const {addProductToOrder} = require('./orders')
-const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCreate, bakeryProductsToCreate} = require('./productSeedArrays')
+const {createNewOrder, addProductToOrder} = require('./orders')
+const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCreate, bakeryProductsToCreate} = require('./productSeedArrays');
+
+
 
   async function dropTables() {
     try {
@@ -53,6 +55,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
 
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
+      "sessionId" VARCHAR(255),
       "userId" INTEGER REFERENCES users(id),
       "checkoutDate" VARCHAR(255), 
       "isCheckedOut" BOOLEAN DEFAULT false, 
@@ -87,7 +90,6 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
     }
   }
   
-  // ! we need to set the user data and fill in the .map( ) argument with the function made to create a user //
   async function createInitialUsers() {
     console.log("Starting to create users...")
     try {
@@ -115,7 +117,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
         },
         { username: "Joseph", 
         password: "test123456",
-        email: "test@gmail.com"
+        email: "test@gmail.com",
         }
       ]
       const users = await Promise.all(usersToCreate.map(createUser))
@@ -135,8 +137,8 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       const bakeryProducts = await Promise.all(bakeryProductsToCreate.map(createProduct))
       console.log("🚀 ~ file: seedData.js ~ createInitialProducts ~ bakeryProducts created:", bakeryProducts)
 
-      // const meatSeafoodProducts = await Promise.all(meatSeafoodProductsToCreate.map(createProduct))
-      // console.log("🚀 ~ file: seedData.js ~ createInitialProducts ~ meatSeafoodProducts created:", meatSeafoodProducts)
+      const meatSeafoodProducts = await Promise.all(meatSeafoodProductsToCreate.map(createProduct))
+      console.log("🚀 ~ file: seedData.js ~ createInitialProducts ~ meatSeafoodProducts created:", meatSeafoodProducts)
 
       const dairyProducts = await Promise.all(dairyProductsToCreate.map(createProduct))
       console.log("🚀 ~ file: seedData.js ~ createInitialProducts ~ dairyProducts created:", dairyProducts)
@@ -187,49 +189,32 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
   //   }
   }
 
-  // ! we need to set the order data seed pages and fill in the .map( ) argument with the function made to create an order
   async function createInitialOrders() {
     console.log("Starting to create reviews...")
     try {
 
       const ordersToCreate = [
         {
-          // todo sessionId: "", not sure how this would work. Will circle back if time allows
-          userId: "",
-          productId: "",
-          quantity: "",
-          isCheckedOut: "",
-          checkoutPrice: ""
+          sessionId: "5698abc", 
+          userId: 5,
         },
         {
-          // todo sessionId: "", not sure how this would work. Will circle back if time allows
-          userId: "",
-          productId: "",
-          quantity: "",
-          isCheckedOut: "",
-          checkoutPrice: ""
+          sessionId: "5648hth",
+          userId: 2,
         },
         {
-          // todo sessionId: "", not sure how this would work. Will circle back if time allows
-          userId: "",
-          productId: "",
-          quantity: "",
-          isCheckedOut: "",
-          checkoutPrice: ""
+          sessionId: "3645wfe",
+          userId: 3,
         },
         {
-          // todo sessionId: "", not sure how this would work. Will circle back if time allows
-          userId: "",
-          productId: "",
-          quantity: "",
-          isCheckedOut: "",
-          checkoutPrice: ""
+          sessionId: "6489igj",
+          userId: 4,
         },
-
       ]
-      const orders = await Promise.all(ordersToCreate.map(addProductToOrder))
-      
-      console.log("🚀 ~ file: seedData.js ~ createInitialReviews ~ orders:", orders)
+
+      const orders = await Promise.all(ordersToCreate.map(createNewOrder))
+            
+      console.log("🚀 ~ file: seedData.js ~ createInitialOrders ~ orders:", orders)
       console.log("Finished creating orders!")
     } catch (error) {
       console.error("Error creating orders!")
@@ -237,14 +222,58 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
     }
   }
 
+  async function createInitialOrderProducts() {
+    console.log("Starting to add products to orders...")
+    try {
+
+      const productsToAddToOrder = [
+        {
+          orderId: 1,
+          productId: 22,
+          quantity: 1,
+        },
+        {
+          orderId: 2,
+          productId: 5,
+          quantity: 1,
+        },
+        {
+          orderId: 3,
+          productId: 10,
+          quantity: 1,
+        },
+        {
+          orderId: 3,
+          productId: 25,
+          quantity: 1,
+        },
+        {
+          orderId: 4,
+          productId: 30,
+          quantity: 3,
+        },
+      ]
+
+      const orderProducts = await Promise.all(productsToAddToOrder.map(addProductToOrder))
+            
+      console.log("🚀 ~ file: seedData.js ~ createInitialOrderProducts ~ orderProducts:", orderProducts)
+      console.log("Finished adding products to orders!")
+    } catch (error) {
+      console.error("Error creating orderProducts!")
+      throw error
+    }
+  }
+
+
   async function rebuildDB() {
     try {
       await dropTables()
       await createTables()
       await createInitialUsers()
       await createInitialProducts()
+      await createInitialOrders()
+      await createInitialOrderProducts()
       // await createInitialReviews()
-      // await createInitialOrders()
     } catch (error) {
       console.log("Error during rebuildDB")
       throw error
