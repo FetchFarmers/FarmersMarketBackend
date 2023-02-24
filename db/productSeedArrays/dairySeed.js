@@ -198,7 +198,8 @@ const dairyProductsToCreate = [
   inventory: 50,
   price: 9.99,
   category: "Dairy",
-  subCategory
+  subCategory: "Cheese",
+  imageURL: "https://example.com/grana-padano.jpg"
 },
 {
   name: "Feta", 
