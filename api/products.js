@@ -1,6 +1,7 @@
 const express = require('express');
+const { requireUser } = require('./utils');
 
-const router = express.Router();
+const productsRouter = express.Router();
 const { 
   getProducts, 
   getProductById, 
@@ -13,7 +14,7 @@ const {
 
 // GET /api/products
 // Retrieves a list of all products in the database.
-router.get('/', async (req, res, next) => {
+productsRouter.get('/', async (req, res, next) => {
   try {
     const products = await getProducts();
     res.send(products);
@@ -24,7 +25,7 @@ router.get('/', async (req, res, next) => {
 
 // GET /api/products/:id
 // Retrieves a single product by its ID.
-router.get('/:id', async (req, res, next) => {
+productsRouter.get('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
     const product = await getProductById(id);
@@ -36,7 +37,7 @@ router.get('/:id', async (req, res, next) => {
 
 // GET /api/products/category/:category
 // Retrieves a list of products that belong to a particular category.
-router.get('/category/:category', async (req, res, next) => {
+productsRouter.get('/category/:category', async (req, res, next) => {
   const { category } = req.params;
   try {
     const products = await getProductsByCategory(category);
@@ -48,7 +49,7 @@ router.get('/category/:category', async (req, res, next) => {
 
 // GET /api/products/subcategory/:subcategory
 // Retrieves a list of products that belong to a particular subcategory.
-router.get('/subcategory/:subcategory', async (req, res, next) => {
+productsRouter.get('/subcategory/:subcategory', async (req, res, next) => {
   const { subcategory } = req.params;
   try {
     const products = await getProductsBySubcategory(subcategory);
@@ -60,7 +61,7 @@ router.get('/subcategory/:subcategory', async (req, res, next) => {
 
 // POST /api/products
 // Creates a new product with the given data.
-router.post('/', async (req, res, next) => {
+productsRouter.post('/', async (req, res, next) => {
   const productData = req.body;
   try {
     const product = await createProduct(productData);
@@ -72,7 +73,7 @@ router.post('/', async (req, res, next) => {
 
 // PUT /api/products/:id
 // Updates an existing product with new data.
-router.put('/:id', async (req, res, next) => {
+productsRouter.put('/:id', async (req, res, next) => {
   const { id } = req.params;
   const updates = req.body;
   try {
@@ -85,7 +86,7 @@ router.put('/:id', async (req, res, next) => {
 
 // DELETE /api/products/:id
 // Deletes a product from the database by its ID.
-router.delete('/:id', async (req, res, next) => {
+productsRouter.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
     await deleteProduct(id);
@@ -95,16 +96,4 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
 module.exports = productsRouter;
-
