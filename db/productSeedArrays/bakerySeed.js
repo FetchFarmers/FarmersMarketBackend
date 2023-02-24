@@ -5,7 +5,7 @@ const bakeryProductsToCreate = [
   inventory: 20,
   price: 6.99,
   category: "Artisan bread",
-  subCategory: "Sourdough bread",
+  subCategory: "Bakery",
   imageURL: ""
   },
   {
@@ -14,7 +14,7 @@ const bakeryProductsToCreate = [
   inventory: 10,
   price: 19.99,
   category: "Pastries and desserts",
-  subCategory: "Fruit pies",
+  subCategory: "Bakery",
   imageURL: ""
   },
   {
@@ -23,7 +23,7 @@ const bakeryProductsToCreate = [
   inventory: 15,
   price: 8.99,
   category: "Savory baked goods",
-  subCategory: "Quiches",
+  subCategory: "Bakery",
   imageURL: ""
   },
   {
@@ -32,7 +32,7 @@ const bakeryProductsToCreate = [
   inventory: 12,
   price: 3.99,
   category: "Gluten-free and vegan",
-  subCategory: "Vegan cupcakes",
+  subCategory: "Bakery",
   imageURL: ""
   },
   {
@@ -41,7 +41,7 @@ const bakeryProductsToCreate = [
   inventory: 25,
   price: 1.99,
   category: "Seasonal specialties",
-  subCategory: "Gingerbread cookies",
+  subCategory: "Bakery",
   imageURL: ""
   }
   ]

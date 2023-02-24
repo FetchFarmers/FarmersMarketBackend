@@ -2,6 +2,17 @@ const client = require("./client");
 const bcrypt = require("bcrypt");
 
 async function getAllUsers() {
+  try {
+    const { rows } = await client.query(`
+      SELECT id, username
+      FROM users
+    `);
+    return rows;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 
 async function createUser({ username, password }) {
   const SALT_COUNT = 10;
@@ -129,6 +140,7 @@ module.exports = {
   getUserByUsername,
   updateUser,
   deleteUser,
+  getAllUsers,
 };
 
 
