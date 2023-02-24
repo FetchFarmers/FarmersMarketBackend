@@ -53,13 +53,13 @@ async function getProductsBySubcategory(subcategory) {
 
 // Creates a new product with the given data.
 async function createProduct(productData) {
-  const { name, description, inventory, price, category, subcategory, imageURL } = productData;
+  const { name, description, inventory, price, category, subCategory, imageURL } = productData;
   try {
     const { rows: [product] } = await client.query(`
       INSERT INTO products(name, description, inventory, price, category, "subCategory", "imageURL")
       VALUES($1, $2, $3, $4, $5, $6, $7)
       RETURNING *;
-    `, [name, description, inventory, price, category, subcategory, imageURL]);
+    `, [name, description, inventory, price, category, subCategory, imageURL]);
     return product;
   } catch (error) {
     throw error;

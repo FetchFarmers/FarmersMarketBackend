@@ -1,5 +1,5 @@
 const client = require("./client");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt")
 
 async function getAllUsers() {
   try {
@@ -14,7 +14,8 @@ async function getAllUsers() {
   }
 }
 
-async function createUser({ username, password, email, isAdmin = false }) {
+async function createUser({ username, password, email, isAdmin }) {
+
   const SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   let userToAdd = { username, hashedPassword, email, isAdmin };
@@ -142,8 +143,3 @@ module.exports = {
   deleteUser,
   getAllUsers,
 };
-
-
-
-
-

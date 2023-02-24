@@ -276,4 +276,4 @@ const dairyProductsToCreate = [
 }
   ]
 
-  module.exports = dairyProductsToCreate
+exports.dairyProductsToCreate = dairyProductsToCreate
