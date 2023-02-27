@@ -2,12 +2,12 @@ const client = require('./client');
 const { updateOrderProductCheckoutPrice } = require('./order_products');
 
 // * will return a new order for the userId provided // No API call
-// todo - still trying to figure out the sessionId and how to include that?
+// todo - still trying work how the session Id will be generated 
 async function createNewOrder({sessionId, userId}) {
   
   try {
     const {
-      rows: [createdOrder] } = await client.query(
+      rows: createdOrder } = await client.query(
       `
         INSERT INTO orders("sessionId", "userId") 
         VALUES($1, $2) 
@@ -125,7 +125,7 @@ async function getAllOpenOrders() {
   }
 }
 
-//* should get current open order with all orderProducts // API call to userOrder
+//* manually tested and working to search orders by userId // API call to userOrder
 async function getOpenOrdersByUser({ userId }) {
 
   try {
@@ -152,6 +152,7 @@ async function getOpenOrdersByUser({ userId }) {
 
 }
 
+// * manually tested and working to search orders by session Id
 async function getOpenOrdersBySession({ sessionId }) {
 
   try {
@@ -174,6 +175,76 @@ async function getOpenOrdersBySession({ sessionId }) {
     throw error;
   }
 
+}
+
+// * manually tested all components - see notes below
+  // * step 1 - is there a passed in userId? yes(step 2) no(step 8)
+  // * step 2 - does userId have an open order? yes(step 3) no(step 4)
+  // * step 3 - return open user order - stop
+  // * step 4 - does sessionId have an open order? yes(step 5) no(step 7)
+  // * step 5 - add userId to db where sessionId continue to step 6
+  // * step 6 - return open session order with associated user - stop
+  // * step 7 - open and return order with session and user details - stop
+  // * step 8 - does sessionId have an open order? yes(step 9) no (step 10)
+  // * step 9 - return open session order - stop 
+  // * step 10 - open and return order with session details - stop
+async function getOpenOrdersByUserInfo({ sessionId, userId }){
+
+  try{
+
+    if (userId) {
+      console.log("step 1")
+      const openUserOrder = await getOpenOrdersByUser({userId})
+      console.log("step 2")
+      if (openUserOrder[0]) {
+        console.log("step 3")
+        return openUserOrder;
+        
+      } else {
+
+        const openSessionOrder = await getOpenOrdersBySession ({sessionId})
+        console.log("step 4")
+        if (openSessionOrder[0]) {
+
+          console.log("step 5")
+          const { rows: [sessionOrderAddedToUser] } = await client.query(
+            `
+              UPDATE orders
+              SET "userId"=${ userId }
+              WHERE id=${ openSessionOrder[0].id }
+              RETURNING *;
+            `,
+          );
+          
+          console.log("step 6")
+          return await getOrderById(sessionOrderAddedToUser.id)
+
+        } else {
+          console.log("step 7")
+          return await createNewOrder({userId, sessionId})
+          
+        }
+      }
+    } else {
+
+      const openSessionOrder = await getOpenOrdersBySession({sessionId}) 
+      console.log("step 8")
+
+      if (openSessionOrder[0]) {
+        console.log("step 9")
+        return openSessionOrder;
+
+      } else {
+        console.log("step 10")
+        return await createNewOrder({sessionId})
+
+      }
+
+    }
+
+  } catch(error) {
+    throw(error)
+  }
 }
 
 //* manually tested and working to return an array of all closed orders for associated userId with orderProducts
@@ -203,7 +274,7 @@ async function getClosedOrdersByUser({ userId }) {
 }
 
 //* manually tested and working - might be helpful to admins to see how many orders included a specific product
-async function getAllOrdersByproduct({ productId }) {
+async function getAllOrdersByProduct({ productId }) {
 
   try {
 
@@ -253,7 +324,7 @@ async function checkoutOrder({ id, checkoutSum, checkoutDate }) {
   }
 }
 
-//* function if the customer wants to completely cancel his whole order and all included products
+//* manually tested and working - function if the customer wants to completely cancel his entire order and all included products
 async function destroyOrder(id) {
 
   try {
@@ -286,12 +357,11 @@ async function addProductToOrder({sessionId, userId, productId, quantity}) {
 
   try {
 
-    if (userId) {
-
-      const userOpenOrder = await getOpenOrdersByUser({userId})
+    const openOrder = await getOpenOrdersByUserInfo({sessionId, userId})
+    console.log("🚀 ~ file: orders.js:361 ~ addProductToOrder ~ openOrder:", openOrder)
     
-      if (userOpenOrder[0]){
-        const orderId = userOpenOrder[0].id
+    
+        const orderId = openOrder[0].id
 
         await client.query(
           `
@@ -304,57 +374,6 @@ async function addProductToOrder({sessionId, userId, productId, quantity}) {
 
         return await getOrderById(orderId);
       
-      } else {
-
-        const newOrder = await createNewOrder({sessionId: sessionId, userId: userId})
-
-        await client.query(
-          `
-            INSERT INTO order_products("orderId", "productId", quantity) 
-            VALUES($1, $2, $3) 
-            RETURNING *;
-          `,
-          [newOrder.id, productId, quantity]
-        );
-
-        return await getOrderById(newOrder.id);
-      }
-
-    } else if (sessionId) {
-
-      const sessionOpenOrder = await getOpenOrdersBySession({sessionId})
-      
-      if (sessionOpenOrder[0]) {
-      const orderId = sessionOpenOrder[0].id
-
-      await client.query(
-        `
-          INSERT INTO order_products("orderId", "productId", quantity) 
-          VALUES($1, $2, $3) 
-          RETURNING *;
-        `,
-        [orderId, productId, quantity]
-      );
-
-      return await getOrderById(orderId);
-
-    } else {
-
-      const newOrder = await createNewOrder({sessionId: sessionId, userId: userId})
-
-      await client.query(
-        `
-          INSERT INTO order_products("orderId", "productId", quantity) 
-          VALUES($1, $2, $3) 
-          RETURNING *;
-        `,
-        [newOrder.id, productId, quantity]
-      );
-
-      return await getOrderById(newOrder.id);
-      
-    }}
-
 
   } catch (error) {
     throw error;
@@ -365,11 +384,12 @@ async function addProductToOrder({sessionId, userId, productId, quantity}) {
 module.exports = {
 createNewOrder,
 getOrderById,
+getOpenOrdersByUserInfo,
 getAllClosedOrders,
 getAllOpenOrders,
 getOpenOrdersByUser,
 getClosedOrdersByUser,
-getAllOrdersByproduct,
+getAllOrdersByProduct,
 getOpenOrdersBySession,
 checkoutOrder,
 destroyOrder,
