@@ -1,11 +1,11 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { requireUser } = require("./utils.js");
-const { getUserByUsername, createUser, getUser, getOrdersByUser } = require("../db");
+const { getUserByUsername, createUser, getUser, getOrdersByUsername } = require("../db");
 
 const usersRouter = express.Router();
 
-// POST /api/users/register
+
 usersRouter.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
   try {
@@ -91,26 +91,15 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
   }
 });
 
-// GET /api/users/:username/orders
+
 usersRouter.get("/:username/orders", requireUser, async (req, res, next) => {
   try {
-    if (req.user && req.user.username === req.params.username) {
-      const orders = await getOrdersByUser(req.user);
-      res.send(orders);
-    } else {
-      const user = await getUserByUsername(req.params.username);
-      if (!user) {
-        next({
-          name: "NoUserError",
-          message: "User does not exist.",
-        });
-      }
-      const orders = await getOrdersByUser(user);
-      res.send(orders);
-    }
+    const orders = await getOrdersByUsername(req.params.username);
+    res.send(orders);
   } catch (error) {
     next(error);
   }
 });
+
 
 module.exports = usersRouter;
