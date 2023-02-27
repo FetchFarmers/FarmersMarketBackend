@@ -16,7 +16,20 @@ function requireUser(req, res, next) {
   
   next();
 }
+
+const requireAdmin = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    return next({
+      name: "UnauthorizedError",
+      message: "You must be an admin to access this resource",
+    });
+  }
+  next();
+};
+
   
 module.exports = {
-  requireUser
+  requireUser,
+  requireAdmin
 }
+
