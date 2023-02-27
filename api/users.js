@@ -1,7 +1,8 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const { requireUser } = require("./utils.js");
-const { getUserByUsername, createUser, getUser, getOrdersByUsername } = require("../db");
+const { requireUser, requireAdmin} = require("./utils.js");
+const { getUserByUsername, createUser, getUser, getOrdersByUsername, 
+  getAllUsers, getUserById, updateUser} = require("../db");
 
 const usersRouter = express.Router();
 
@@ -96,6 +97,40 @@ usersRouter.get("/:username/orders", requireUser, async (req, res, next) => {
   try {
     const orders = await getOrdersByUsername(req.params.username);
     res.send(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+usersRouter.get("/", requireAdmin, async (req, res, next) => {
+  try {
+    const users = await getAllUsers();
+    res.send(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+usersRouter.delete('/:id', requireUser, async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = await deleteUser(userId);
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+
+usersRouter.put('/me', requireUser, async (req, res, next) => {
+  try {
+    const updatedUser = await updateUser(req.user.id, req.body);
+    res.send(updatedUser);
   } catch (error) {
     next(error);
   }
