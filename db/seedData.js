@@ -210,6 +210,10 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
           sessionId: "6489igj",
           userId: 4,
         },
+        {
+          sessionId: "4647sre",
+          userId: 1,
+        }
       ]
 
       const orders = await Promise.all(ordersToCreate.map(createNewOrder))
@@ -228,30 +232,36 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
 
       const productsToAddToOrder = [
         {
-          orderId: 1,
+          userId: 1,
           productId: 22,
           quantity: 1,
         },
         {
-          orderId: 2,
+          userId: 2,
           productId: 5,
           quantity: 1,
         },
         {
-          orderId: 3,
+          userId: 3,
           productId: 10,
           quantity: 1,
         },
         {
-          orderId: 3,
+          userId: 3,
           productId: 25,
           quantity: 1,
         },
         {
-          orderId: 4,
+          userId: 4,
           productId: 30,
           quantity: 3,
         },
+        {
+          userId: 5,
+          productId: 62,
+          quantity: 1,
+        },
+
       ]
 
       const orderProducts = await Promise.all(productsToAddToOrder.map(addProductToOrder))
