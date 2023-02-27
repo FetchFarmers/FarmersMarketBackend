@@ -1,8 +1,8 @@
 const client = require('./client');
 const { updateOrderProductCheckoutPrice } = require('./order_products');
-const { getUserByUsername } = require('./users');
 
-// * will return a new order for the userId provided //
+// * will return a new order for the userId provided // No API call
+// todo - still trying to figure out the sessionId and how to include that?
 async function createNewOrder({sessionId, userId}) {
   
   try {
@@ -22,21 +22,21 @@ async function createNewOrder({sessionId, userId}) {
   }
 }
 
-// * Helper function to get orders with associated products //
+// * Helper function to get orders with associated products // No API call
 async function getOrderById(id) {
 
   try {
 
-    const { rows: [orderById] } = await client.query(
+    const { rows: [userOrderById] } = await client.query(
       `
-        SELECT orders.*, users.username AS "orderCreator" 
+        SELECT orders.*, users.username AS "orderCreator"
         FROM orders
         JOIN users ON orders."userId" = users.id
         WHERE orders.id=${id};
       `
     );
 
-    if (orderById){
+    if (userOrderById){
       const { rows: orderProducts } = await client.query(
         `
           SELECT products.id, products.name, products.description, products.price, order_products.id AS "orderProductId", 
@@ -47,9 +47,31 @@ async function getOrderById(id) {
         `
       );
 
-      orderById.products = orderProducts;
-      return orderById;
+      userOrderById.products = orderProducts;
+      return userOrderById;
 
+    } else {
+
+      const { rows: [sessionOrderById] } = await client.query(
+        `
+          SELECT * FROM orders
+          WHERE orders.id=${id};
+        `
+      );
+
+      const { rows: orderProducts } = await client.query(
+        `
+          SELECT products.id, products.name, products.description, products.price, order_products.id AS "orderProductId", 
+          order_products."orderId", order_products.quantity, order_products."checkoutPrice" 
+          FROM products 
+          JOIN order_products ON order_products."productId" = products.id 
+          WHERE order_products."orderId"=${id};
+        `
+      );
+
+      sessionOrderById.products = orderProducts;
+      return sessionOrderById;
+      
     }
     
   } catch (error) {
@@ -57,7 +79,7 @@ async function getOrderById(id) {
   }
 }
 
-//* for admins to see all orders history //
+//* for admins to see all orders history // API call to /orders/closed
 async function getAllClosedOrders() {
   try {
 
@@ -80,7 +102,7 @@ async function getAllClosedOrders() {
   }
 }
 
-//* for admins to see all outstanding open orders //
+//* for admins to see all outstanding open orders // API call to /orders/open
 async function getAllOpenOrders() {
   try {
 
@@ -103,8 +125,8 @@ async function getAllOpenOrders() {
   }
 }
 
-//* should get current open order with all orderProducts //
-async function getOpenOrdersByUser({ username }) {
+//* should get current open order with all orderProducts // API call to userOrder
+async function getOpenOrdersByUser({ userId }) {
 
   try {
 
@@ -113,7 +135,7 @@ async function getOpenOrdersByUser({ username }) {
       SELECT orders.id
       FROM orders
       JOIN users ON orders."userId" = users.id
-      WHERE users.username='${username}' 
+      WHERE users.Id='${userId}' 
       AND orders."isCheckedOut"=false;
       `
     );
@@ -130,8 +152,32 @@ async function getOpenOrdersByUser({ username }) {
 
 }
 
+async function getOpenOrdersBySession({ sessionId }) {
+
+  try {
+
+    const { rows: orderId } = await client.query(
+      `
+        SELECT id FROM orders
+        WHERE "sessionId"='${sessionId}' 
+        AND "isCheckedOut"=false;
+      `
+    );
+
+    const orders = await Promise.all(
+      orderId.map((order) => getOrderById(order.id))
+    );
+      
+    return orders;
+
+  } catch (error) {
+    throw error;
+  }
+
+}
+
 //* manually tested and working to return an array of all closed orders for associated userId with orderProducts
-async function getClosedOrdersByUser({ username }) {
+async function getClosedOrdersByUser({ userId }) {
   try {
 
     const { rows: orderId } = await client.query(
@@ -139,7 +185,7 @@ async function getClosedOrdersByUser({ username }) {
       SELECT orders.id
       FROM orders
       JOIN users ON orders."userId" = users.id
-      WHERE users.username='${username}' 
+      WHERE users.id='${userId}' 
       AND orders."isCheckedOut"=true;
       `
     );
@@ -157,7 +203,7 @@ async function getClosedOrdersByUser({ username }) {
 }
 
 //* manually tested and working - might be helpful to admins to see how many orders included a specific product
-async function getAllOrdersByproduct({ id }) {
+async function getAllOrdersByproduct({ productId }) {
 
   try {
 
@@ -166,7 +212,7 @@ async function getAllOrdersByproduct({ id }) {
         SELECT order_products."orderId"
         FROM products 
         JOIN order_products ON order_products."productId" = products.id 
-        WHERE products.id=${id};
+        WHERE products.id=${productId};
       `
     );    
 
@@ -235,13 +281,53 @@ async function destroyOrder(id) {
 
 }
 
-  // todo (kind of working) add a new row to order_products to add that product to the specific order and create a new order if there isn't an existing order
-async function addProductToOrder({orderId, productId, quantity}) {
-  
-  try {
-      
+//* manually tested and working - checks for existing order if yes adds products if no creates an order and adds products - first looks at user then at session if no user 
+async function addProductToOrder({sessionId, userId, productId, quantity}) {
 
-      const { rows: [createdOrderProduct] } = await client.query(
+  try {
+
+    if (userId) {
+
+      const userOpenOrder = await getOpenOrdersByUser({userId})
+    
+      if (userOpenOrder[0]){
+        const orderId = userOpenOrder[0].id
+
+        await client.query(
+          `
+            INSERT INTO order_products("orderId", "productId", quantity) 
+            VALUES($1, $2, $3) 
+            RETURNING *;
+          `,
+          [orderId, productId, quantity]
+        );
+
+        return await getOrderById(orderId);
+      
+      } else {
+
+        const newOrder = await createNewOrder({sessionId: sessionId, userId: userId})
+
+        await client.query(
+          `
+            INSERT INTO order_products("orderId", "productId", quantity) 
+            VALUES($1, $2, $3) 
+            RETURNING *;
+          `,
+          [newOrder.id, productId, quantity]
+        );
+
+        return await getOrderById(newOrder.id);
+      }
+
+    } else if (sessionId) {
+
+      const sessionOpenOrder = await getOpenOrdersBySession({sessionId})
+      
+      if (sessionOpenOrder[0]) {
+      const orderId = sessionOpenOrder[0].id
+
+      await client.query(
         `
           INSERT INTO order_products("orderId", "productId", quantity) 
           VALUES($1, $2, $3) 
@@ -250,9 +336,25 @@ async function addProductToOrder({orderId, productId, quantity}) {
         [orderId, productId, quantity]
       );
 
-      return await createdOrderProduct;
+      return await getOrderById(orderId);
 
-    // }
+    } else {
+
+      const newOrder = await createNewOrder({sessionId: sessionId, userId: userId})
+
+      await client.query(
+        `
+          INSERT INTO order_products("orderId", "productId", quantity) 
+          VALUES($1, $2, $3) 
+          RETURNING *;
+        `,
+        [newOrder.id, productId, quantity]
+      );
+
+      return await getOrderById(newOrder.id);
+      
+    }}
+
 
   } catch (error) {
     throw error;
@@ -268,6 +370,7 @@ getAllOpenOrders,
 getOpenOrdersByUser,
 getClosedOrdersByUser,
 getAllOrdersByproduct,
+getOpenOrdersBySession,
 checkoutOrder,
 destroyOrder,
 addProductToOrder,
