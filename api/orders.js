@@ -171,7 +171,7 @@ ordersRouter.delete("/user/open/order_products/:orderProductId", async (req, res
 
     try{
 
-        const orderWithoutProduct = await destroyOrder(orderProductId)
+        const orderWithoutProduct = await removeProductFromOrder(orderProductId)
         res.send(orderWithoutProduct)
 
     } catch(error) {
