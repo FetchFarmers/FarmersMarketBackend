@@ -148,5 +148,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getAllUsers,
-  getOrdersByUsername
+
 };
