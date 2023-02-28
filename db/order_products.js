@@ -1,6 +1,6 @@
 const client = require('./client');
 
-  // * should get the orderProduct by id
+  // * manually tested and working to get the orderProduct by id
   async function getOrderProductById(id) {
   
     try {
@@ -19,14 +19,14 @@ const client = require('./client');
   
   }
   
-  // * should get the orderProducts by orderId
-  async function getOrderProductByOrder({ id }) {
+  // * manually tested and working to get the orderProducts by orderId
+  async function getOrderProductsByOrder({ orderId }) {
     try {
       const { rows: orderProductsByOrderId } = await client.query(
         `
           SELECT *
           FROM order_products
-          WHERE "orderId"=${id};
+          WHERE "orderId"=${orderId};
         `
       );
       
@@ -36,7 +36,7 @@ const client = require('./client');
     }
   }
   
-  // * should update the quantity of the order product 
+  // * manually tested and working to update the quantity of the order product 
   async function updateOrderProductQuantity({ id, quantity }) {
 
     try {
@@ -58,7 +58,7 @@ const client = require('./client');
   
   }
 
-    // * Working as a helper function to checkout order with function checkoutOrder
+  // * Working as a helper function to checkout order with function checkoutOrder
   async function updateOrderProductCheckoutPrice( id, checkoutPrice ) {
 
     try {
@@ -80,7 +80,7 @@ const client = require('./client');
       
   }
   
-  // * should delete the product from the specific order
+  // * manually tested and working to delete the product from the specific order
   async function removeProductFromOrder(id) {
   
     try {
@@ -101,6 +101,8 @@ const client = require('./client');
   }
   
   // * should return true if the userId passed in matches the userId of the order associated with the passed in orderProductId 
+  // ? I don't think we need this one because a session user should also be able to edit the order and they should only see their
+  // ? order when clicking on the cart so if they see it they have the ability to edit it
   async function canEditOrderProduct(orderProductId, userId) {
   
     try {
@@ -148,7 +150,7 @@ const client = require('./client');
 
   module.exports = {
         getOrderProductById,
-        getOrderProductByOrder,
+        getOrderProductsByOrder,
         updateOrderProductQuantity,
         updateOrderProductCheckoutPrice,
         removeProductFromOrder,
