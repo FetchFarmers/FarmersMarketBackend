@@ -92,7 +92,7 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
   }
 });
 
-
+//! I have a DB function and API call to get the user orders by userId if exists or by sessionId if not
 usersRouter.get("/:username/orders", requireUser, async (req, res, next) => {
   try {
     const orders = await getOrdersByUsername(req.params.username);

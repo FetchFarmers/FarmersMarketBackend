@@ -2,7 +2,7 @@ const client = require('./client');
 const { updateOrderProductCheckoutPrice } = require('./order_products');
 
 // * will return a new order for the userId provided // No API call
-// todo - still trying work how the session Id will be generated 
+// todo - still trying work out how the session Id will be generated 
 async function createNewOrder({sessionId, userId}) {
   
   try {
@@ -248,7 +248,7 @@ async function getOpenOrdersByUserInfo({ sessionId, userId }){
 }
 
 //* manually tested and working to return an array of all closed orders for associated userId with orderProducts
-async function getClosedOrdersByUser({ userId }) {
+async function getClosedOrdersByUser( userId ) {
   try {
 
     const { rows: orderId } = await client.query(
@@ -274,7 +274,7 @@ async function getClosedOrdersByUser({ userId }) {
 }
 
 //* manually tested and working - might be helpful to admins to see how many orders included a specific product
-async function getAllOrdersByProduct({ productId }) {
+async function getAllOrdersByProduct( productId ) {
 
   try {
 
