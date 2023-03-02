@@ -50,7 +50,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       price DECIMAL (10,2) NOT NULL,
       category VARCHAR(255) NOT NULL,
       "subCategory" VARCHAR(255) NOT NULL,
-      "imageURL" VARCHAR(255) NOT NULL
+      "imageURL" VARCHAR(500) NOT NULL
     );
 
     CREATE TABLE orders (
