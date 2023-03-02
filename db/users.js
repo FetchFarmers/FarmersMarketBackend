@@ -1,6 +1,7 @@
 const client = require("./client");
 const bcrypt = require("bcrypt")
 
+//tested and passed
 async function getAllUsers() {
   try {
     const { rows } = await client.query(`
@@ -53,6 +54,7 @@ async function createUser({ username, password, email, isAdmin }) {
 async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
+    
     const hashedPassword = user.password;
     let passwordsMatch = await bcrypt.compare(password, hashedPassword);
     if (passwordsMatch) {
@@ -72,7 +74,7 @@ async function getUserById(userId) {
   try {
     const { rows: [user] } = await client.query(
       `
-      SELECT id, username
+      SELECT id, username, "isAdmin"
       FROM users
       WHERE id=$1
     `,
@@ -97,6 +99,7 @@ async function getUserByUsername(username) {
     `,
       [username]
     );
+    console.log(user)
     return user;
   } catch (error) {
     console.error(error);

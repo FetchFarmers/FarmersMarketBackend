@@ -6,9 +6,8 @@ const { getUserByUsername, createUser, getUser,
 
 const usersRouter = express.Router();
 
-
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, email, isAdmin } = req.body;
   try {
     const _user = await getUserByUsername(username);
 
@@ -31,10 +30,12 @@ usersRouter.post("/register", async (req, res, next) => {
     const user = await createUser({
       username,
       password,
+      email,
+      isAdmin,
     });
 
     const token = jwt.sign(user, process.env.JWT_SECRET);
-
+    console.log(token);
     res.send({
       message: "Thank you for registering.",
       token,
@@ -49,9 +50,53 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 });
 
+
+// usersRouter.post("/register", async (req, res, next) => {
+//   const { username, password } = req.body;
+//   try {
+//     const _user = await getUserByUsername(username);
+
+//     if (_user) {
+//       next({
+//         message: `User ${username} is already taken.`,
+//         name: UserTakenError(username),
+//         error: UserTakenError(username),
+//       });
+//     }
+
+//     if (password.length < 8) {
+//       next({
+//         message: "Password Too Short!",
+//         name: PasswordTooShortError(),
+//         error: PasswordTooShortError(),
+//       });
+//     }
+
+//     const user = await createUser({
+//       username,
+//       password,
+//     });
+
+//     const token = jwt.sign(user, process.env.JWT_SECRET);
+//     console.log(token);
+//     res.send({
+//       message: "Thank you for registering.",
+//       token,
+//       user: user,
+//     });
+//   } catch (error) {
+//     next({
+//       message: error.message,
+//       name: error.name,
+//       error: "Error",
+//     });
+//   }
+// });
+
 // POST /api/users/login
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
+  console.log(username, password)
   if (!username || !password) {
     return next({
       name: "MissingUsernameOrPasswordError",

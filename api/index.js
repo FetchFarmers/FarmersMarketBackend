@@ -15,7 +15,7 @@ router.get('/farm', async (req, res, next) => {
 router.use(async (req, res, next) => {
     const prefix = 'Bearer ';
     const auth = req.header('Authorization');
-
+// const admin = req.header ('isAdmin')
     if (!auth) {
         next();
     } else if (auth.startsWith(prefix)) {
