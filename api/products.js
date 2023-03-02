@@ -63,6 +63,8 @@ productsRouter.get('/subcategory/:subcategory', async (req, res, next) => {
 // Creates a new product with the given data.
 productsRouter.post('/', async (req, res, next) => {
   const productData = req.body;
+  console.log(req.body);
+  console.log(productData);
   try {
     const product = await createProduct(productData);
     res.send(product);
