@@ -51,6 +51,7 @@ async function createUser({ username, password, email, isAdmin }) {
   }
 }
 
+//passed test
 async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
@@ -70,6 +71,7 @@ async function getUser({ username, password }) {
   }
 }
 
+ 
 async function getUserById(userId) {
   try {
     const { rows: [user] } = await client.query(
@@ -107,6 +109,7 @@ async function getUserByUsername(username) {
   }
 }
 
+//this function passed the test
 async function updateUser(id, updates) {
   const setString = Object.keys(updates)
     .map((key, index) => `"${key}"=$${index + 1}`)
@@ -146,10 +149,10 @@ async function deleteUser(id) {
 module.exports = {
   createUser,
   getUser,
-  getUserById,
   getUserByUsername,
   updateUser,
   deleteUser,
+  getUserById,
   getAllUsers,
 
 };
