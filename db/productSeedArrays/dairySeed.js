@@ -8,7 +8,7 @@ const dairyProductsToCreate = [
     price: 4.99,
     category: "Dairy",
     subCategory: "Milk & Cream",
-    imageURL: "https://example.com/grass-fed-milk.jpg"
+    imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Buttermilk-%28right%29-and-Milk-%28left%29.jpg/800px-Buttermilk-%28right%29-and-Milk-%28left%29.jpg?20080926192314"
   },
   {
     name: "Buttermilk",
@@ -17,7 +17,7 @@ const dairyProductsToCreate = [
     price: 3.49,
     category: "Dairy",
     subCategory: "Milk & Cream",
-    imageURL: "https://example.com/buttermilk.jpg"
+    imageURL: "https://c.pxhere.com/photos/1d/52/photo-1622031.jpg!d"
   },
   {
     name: "Heavy Cream",
@@ -26,7 +26,7 @@ const dairyProductsToCreate = [
     price: 5.99,
     category: "Dairy",
     subCategory: "Milk & Cream",
-    imageURL: "https://example.com/heavy-cream.jpg"
+    imageURL: "https://get.pxhere.com/photo/food-milk-Raw-milk-buttermilk-dairy-lactose-almond-milk-Grain-milk-Milk-punch-hemp-milk-plant-milk-Rice-milk-yogurt-Amazake-drink-soy-milk-coconut-milk-cream-mason-jar-dessert-breakfast-ingredient-condensed-milk-kefir-1484293.jpg"
   },
   {
     name: "Half & Half",
@@ -35,7 +35,7 @@ const dairyProductsToCreate = [
     price: 2.99,
     category: "Dairy",
     subCategory: "Milk & Cream",
-    imageURL: "https://example.com/half-and-half.jpg"
+    imageURL: "https://live.staticflickr.com/4851/44586577260_112805f0be_b.jpg"
   },
   {
     name: "Egg Nog",
@@ -44,7 +44,7 @@ const dairyProductsToCreate = [
     price: 6.99,
     category: "Dairy",
     subCategory: "Milk & Cream",
-    imageURL: "https://example.com/eggnog.jpg"
+    imageURL: "https://c.pxhere.com/photos/9f/83/beverage_bowl_breakfast_cappuccino_cinnamon_coffee_cream_cup-1537203.jpg!d"
   },
 //eggs & butter
 {
@@ -54,7 +54,7 @@ const dairyProductsToCreate = [
   price: 3.99,
   category: "Dairy",
   subCategory: "Eggs & Butter",
-  imageURL: "https://example.com/salted-butter.jpg"
+  imageURL: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/frbutter_food_nutrition_delicious-image-kybbyrka.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=7c1b7047c3754579f95a36898dc2180e"
 },
 {
   name: "Unsalted Butter",
@@ -63,7 +63,7 @@ const dairyProductsToCreate = [
   price: 3.99,
   category: "Dairy",
   subCategory: "Eggs & Butter",
-  imageURL: "https://example.com/unsalted-butter.jpg"
+  imageURL: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/frbutter_food_nutrition_delicious-image-kybbyrka.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=7c1b7047c3754579f95a36898dc2180e"
 },
 {
   name: "Garlic Butter",
@@ -72,7 +72,7 @@ const dairyProductsToCreate = [
   price: 4.99,
   category: "Dairy",
   subCategory: "Eggs & Butter",
-  imageURL: "https://example.com/garlic-butter.jpg"
+  imageURL: "https://live.staticflickr.com/5127/5225540338_44bbd701fe_b.jpg"
 },
 {
   name: "Sweet Cream Butter",
@@ -81,7 +81,7 @@ const dairyProductsToCreate = [
   price: 4.49,
   category: "Dairy",
   subCategory: "Eggs & Butter",
-  imageURL: "https://example.com/sweet-cream-butter.jpg"
+  imageURL: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/frbutter_food_nutrition_delicious-image-kybbyrka.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=7c1b7047c3754579f95a36898dc2180e"
 },
 {
   name: "Lard",
@@ -90,7 +90,7 @@ const dairyProductsToCreate = [
   price: 2.99,
   category: "Dairy",
   subCategory: "Eggs & Butter",
-  imageURL: "https://example.com/lard.jpg"
+  imageURL: "https://c.pxhere.com/photos/8b/10/blur_cheese_close_up_dairy_product_depth_of_field_focus_food_food_photography-1528189.jpg!d"
 },
 {
   name: "Pasture Raised eggs",
@@ -99,7 +99,7 @@ const dairyProductsToCreate = [
   price: 5.99,
   category: "Dairy",
   subCategory: "Eggs & Butter",
-  imageURL: "https://example.com/pasture-raised-eggs.jpg"
+  imageURL: "https://live.staticflickr.com/5137/5483256997_7ac715aa83_b.jpg"
 },
 //cheese
 {
@@ -109,7 +109,7 @@ const dairyProductsToCreate = [
   price: 8.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/aged-gouda.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/WikiCheese_-_Gouda_36_mois_03.jpg/1280px-WikiCheese_-_Gouda_36_mois_03.jpg"
 },
 {
   name: "Bocconcini",
@@ -118,7 +118,7 @@ const dairyProductsToCreate = [
   price: 6.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/bocconcini.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/0/02/Bocconcini_gobeirne.jpg"
 },
 {
   name: "Burrata",
@@ -127,7 +127,7 @@ const dairyProductsToCreate = [
   price: 9.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/burrata.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Burrata2.jpg/800px-Burrata2.jpg?20160701200821"
 },
 {
   name: "Camembert",
@@ -136,7 +136,7 @@ const dairyProductsToCreate = [
   price: 7.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/camembert.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Camembert_de_Normandie_%28AOP%29_11.jpg/800px-Camembert_de_Normandie_%28AOP%29_11.jpg?20150306212809"
 },
 {
   name: "Parmigiano Reggiano",
@@ -145,7 +145,7 @@ const dairyProductsToCreate = [
   price: 12.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/parmigiano-reggiano.jpg"
+  imageURL: "https://live.staticflickr.com/4084/4959064756_8f534b1235_b.jpg"
 },
 {
   name: "Fresh Mozzarella",
@@ -154,7 +154,7 @@ const dairyProductsToCreate = [
   price: 5.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/fresh-mozzarella.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Mozzarella_di_bufala2.jpg/800px-Mozzarella_di_bufala2.jpg?20160708055137"
 },
 {
   name: "Gruyere",
@@ -163,7 +163,7 @@ const dairyProductsToCreate = [
   price: 10.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/gruyere.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Gruy%C3%A8re.jpg"
 },
 {
   name: "White Cheddar",
@@ -172,16 +172,16 @@ const dairyProductsToCreate = [
   price: 7.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/white-cheddar.jpg"
+  imageURL: "https://pixnio.com/free-images/food-and-drink/cheese/white-cheddar-cheese-1150x863.jpg"
 },
 {
-  name: "Cream cheese",
+  name: "Cream Cheese",
   description: "Soft and spreadable cheese",
   inventory: 50,
   price: 4.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/cream-cheese.jpg"
+  imageURL: "https://www.publicdomainpictures.net/pictures/290000/velka/cream-cheese-bagel.jpg"
 },
 {
   name: "Ricotta",
@@ -190,7 +190,7 @@ const dairyProductsToCreate = [
   price: 4.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/ricotta.jpg"
+  imageURL: "https://live.staticflickr.com/4086/5033608294_54d68b87e3_b.jpg"
 },
 {
   name: "Grana Padano",
@@ -199,7 +199,7 @@ const dairyProductsToCreate = [
   price: 9.99,
   category: "Dairy",
   subCategory: "Cheese",
-  imageURL: "https://example.com/grana-padano.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Grana_Padano_DOP.jpg"
 },
 {
   name: "Feta", 
@@ -208,7 +208,7 @@ const dairyProductsToCreate = [
   price: 6.99, 
   category: "Eggs and dairy", 
   subCategory: "Cheese",
-  imageURL: "https://example.com/feta.jpg"
+  imageURL: "https://www.freeimageslive.co.uk/files/images009/greek_feta.preview.jpg"
 }, 
 {
   name: "Goat Cheese", 
@@ -217,7 +217,7 @@ const dairyProductsToCreate = [
   price: 7.99, 
   category: "Eggs and dairy", 
   subCategory: "Cheese",
-  imageURL: "https://example.com/goat-cheese.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/9/94/Ziegenkaese_Rolle_II.jpg"
 }, 
 {
   name: "Pecorino Romano", 
@@ -226,7 +226,7 @@ const dairyProductsToCreate = [
   price: 8.99, 
   category: "Eggs and dairy", 
   subCategory: "Cheese",
-  imageURL: "https://example.com/pecorino-romano.jpg"
+  imageURL: "https://pixnio.com/free-images/food-and-drink/cheese/pecorino-romano-cheese-1150x863.jpg"
 },
 //yogurt and cultured Dairy
 {
@@ -236,7 +236,7 @@ const dairyProductsToCreate = [
   price: 2.99, 
   category: "Eggs and dairy", 
   subCategory: "Yogurt and Cultured Dairy",
-  imageURL: "https://example.com/sour-cream.jpg"
+  imageURL: "https://live.staticflickr.com/1846/44211965261_269e54067d_b.jpg"
 }, 
 {
   name: "Kefir", 
@@ -245,7 +245,7 @@ const dairyProductsToCreate = [
   price: 3.99, 
   category: "Eggs and dairy", 
   subCategory: "Yogurt and Cultured Dairy",
-  imageURL: "https://example.com/kefir.jpg"
+  imageURL: "https://live.staticflickr.com/1839/43494200074_02294be0de_b.jpg"
 }, 
 {
   name: "Greek yogurt", 
@@ -254,7 +254,7 @@ const dairyProductsToCreate = [
   price: 4.99, 
   category: "Eggs and dairy", 
   subCategory: "Yogurt and Cultured Dairy",
-  imageURL: "https://example.com/greek-yogurt.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Joghurt.jpg"
 },
 {
   name: "Plain whole milk yogurt", 
@@ -263,7 +263,7 @@ const dairyProductsToCreate = [
   price: 3.49, 
   category: "Eggs and dairy", 
   subCategory: "Yogurt and Cultured Dairy",
-  imageURL: "https://example.com/plain-yogurt.jpg"
+  imageURL: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/frwhipped_cream_cream_fat-image-kybai4mt.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=4e5c6843b880a662c9ff57489024899d"
 }, 
 {
   name: "Creme Fraiche", 
@@ -272,7 +272,7 @@ const dairyProductsToCreate = [
   price: 5.99, 
   category: "Eggs and dairy", 
   subCategory: "Yogurt and Cultured Dairy",
-  imageURL: "https://example.com/creme-fraiche.jpg"
+  imageURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Raspberries_with_cr%C3%A8me_fra%C3%AEche_and_sugar.jpg/800px-Raspberries_with_cr%C3%A8me_fra%C3%AEche_and_sugar.jpg?20080524005507"
 }
   ]
 

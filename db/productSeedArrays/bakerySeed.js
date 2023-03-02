@@ -6,7 +6,7 @@ const bakeryProductsToCreate = [
   price: 6.99,
   category: "Bakery",
   subCategory: "Artisan bread",
-  imageURL: "https://www.pexels.com/photo/brown-bread-on-white-table-6608542/"
+  imageURL: "https://images.pexels.com/photos/6608542/pexels-photo-6608542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
   name: "Apple Pie",
@@ -15,7 +15,7 @@ const bakeryProductsToCreate = [
   price: 19.99,
   category: "Bakery",
   subCategory: "Pastries and desserts",
-  imageURL: "https://www.pexels.com/photo/brown-pie-on-tray-3223494/"
+  imageURL: "https://images.pexels.com/photos/3223494/pexels-photo-3223494.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
   name: "Mushroom and Cheese Quiche",
@@ -24,7 +24,7 @@ const bakeryProductsToCreate = [
   price: 8.99,
   category: "Bakery",
   subCategory: "Savory baked goods",
-  imageURL: "https://www.pexels.com/photo/appetizing-baked-sliced-seafood-pizza-with-mushrooms-4553127/"
+  imageURL: "https://images.pexels.com/photos/4553127/pexels-photo-4553127.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
   name: "Vegan Chocolate Cupcakes",
@@ -33,7 +33,7 @@ const bakeryProductsToCreate = [
   price: 3.99,
   category: "Bakery",
   subCategory: "Gluten-free and vegan",
-  imageURL: "https://www.pexels.com/photo/delicious-chocolate-cupcakes-15511436/"
+  imageURL: "https://images.pexels.com/photos/15511436/pexels-photo-15511436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
   name: "Gingerbread Cookies",
@@ -42,7 +42,7 @@ const bakeryProductsToCreate = [
   price: 1.99,
   category: "Bakery",
   subCategory: "Seasonal specialties",
-  imageURL: "https://www.pexels.com/photo/brown-star-shaped-cookies-on-white-and-green-leaves-5702985/"
+  imageURL: "https://images.pexels.com/photos/5702985/pexels-photo-5702985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }
   ]
   
