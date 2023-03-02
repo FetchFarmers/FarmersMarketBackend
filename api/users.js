@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { requireUser, requireAdmin} = require("./utils.js");
 const { getUserByUsername, createUser, getUser, 
-  getAllUsers, getUserById, updateUser} = require("../db");
+  getAllUsers,  getUserById, deleteUser, updateUser} = require("../db");
 
 const usersRouter = express.Router();
 
@@ -175,3 +175,4 @@ usersRouter.put('/me', requireUser, async (req, res, next) => {
 
 
 module.exports = usersRouter;
+
