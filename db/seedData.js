@@ -49,7 +49,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       inventory INTEGER NOT NULL,
       price DECIMAL (10,2) NOT NULL,
       category VARCHAR(255) NOT NULL,
-      "subCategory" VARCHAR(255) NOT NULL,
+      "subcategory" VARCHAR(255) NOT NULL,
       "imageURL" VARCHAR(500) NOT NULL
     );
 

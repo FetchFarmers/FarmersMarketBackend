@@ -5,7 +5,7 @@ const bakeryProductsToCreate = [
   inventory: 20,
   price: 6.99,
   category: "Bakery",
-  subCategory: "Artisan bread",
+  subcategory: "Artisan bread",
   imageURL: "https://images.pexels.com/photos/6608542/pexels-photo-6608542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -14,7 +14,7 @@ const bakeryProductsToCreate = [
   inventory: 10,
   price: 19.99,
   category: "Bakery",
-  subCategory: "Pastries and desserts",
+  subcategory: "Pastries and desserts",
   imageURL: "https://images.pexels.com/photos/3223494/pexels-photo-3223494.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -23,7 +23,7 @@ const bakeryProductsToCreate = [
   inventory: 15,
   price: 8.99,
   category: "Bakery",
-  subCategory: "Savory baked goods",
+  subcategory: "Savory baked goods",
   imageURL: "https://images.pexels.com/photos/4553127/pexels-photo-4553127.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -32,7 +32,7 @@ const bakeryProductsToCreate = [
   inventory: 12,
   price: 3.99,
   category: "Bakery",
-  subCategory: "Gluten-free and vegan",
+  subcategory: "Gluten-free and vegan",
   imageURL: "https://images.pexels.com/photos/15511436/pexels-photo-15511436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -41,7 +41,7 @@ const bakeryProductsToCreate = [
   inventory: 25,
   price: 1.99,
   category: "Bakery",
-  subCategory: "Seasonal specialties",
+  subcategory: "Seasonal specialties",
   imageURL: "https://images.pexels.com/photos/5702985/pexels-photo-5702985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }
   ]

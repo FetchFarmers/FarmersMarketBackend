@@ -6,7 +6,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 5.99, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/1149021/pexels-photo-1149021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -15,7 +15,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 2.79, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/915016/pexels-photo-915016.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -24,7 +24,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 4.99, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/70862/pexels-photo-70862.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -33,7 +33,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.48, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/5645123/pexels-photo-5645123.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -42,7 +42,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 0.79, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/952365/pexels-photo-952365.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -51,7 +51,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: .72, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/4022783/pexels-photo-4022783.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -60,7 +60,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.50, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/557659/pexels-photo-557659.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -69,7 +69,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.38, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -78,7 +78,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.50, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
   {
@@ -87,7 +87,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 7.98, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Fruits",
+    subcategory: "Fresh Fruits",
     imageURL: "https://images.pexels.com/photos/106148/strawberries-fruit-red-sweet-106148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -96,7 +96,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 2.19, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/3004798/pexels-photo-3004798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -105,7 +105,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.39, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/5792430/pexels-photo-5792430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -114,7 +114,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.49, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/9573478/pexels-photo-9573478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -123,7 +123,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.49, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/128420/pexels-photo-128420.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -132,7 +132,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.50, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -141,7 +141,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.19, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/4197444/pexels-photo-4197444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -150,7 +150,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 2.49, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/351679/pexels-photo-351679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },  
   {
@@ -159,7 +159,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 2.49, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/47347/broccoli-vegetable-food-healthy-47347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -168,7 +168,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.99, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
@@ -177,7 +177,7 @@ const fruitVegProductsToCreate = [
     inventory: 50, 
     price: 1.49, 
     category: "Fresh Fruits and Vegetables", 
-    subCategory: "Fresh Vegetables",
+    subcategory: "Fresh Vegetables",
     imageURL: "https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }, 
 ]
