@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { requireUser, requireAdmin} = require("./utils.js");
 const { getUserByUsername, createUser, getUser, 
-  getAllUsers,  getUserById, deleteUser, updateUser} = require("../db");
+  getAllUsers, updateUser} = require("../db");
 
 const usersRouter = express.Router();
 
@@ -151,15 +151,15 @@ usersRouter.get("/", requireAdmin, async (req, res, next) => {
 
 
 
-usersRouter.delete('/:id', requireUser, async (req, res, next) => {
-  try {
-    const userId = req.params.id;
-    const user = await deleteUser(userId);
-    res.sendStatus(204);
-  } catch (error) {
-    next(error);
-  }
-});
+// usersRouter.delete('/:id', requireUser, async (req, res, next) => {
+//   try {
+//     const userId = req.params.id;
+//     const user = await deleteUser(userId);
+//     res.sendStatus(204);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 
 
