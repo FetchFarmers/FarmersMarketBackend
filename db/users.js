@@ -132,26 +132,25 @@ async function updateUser(id, updates) {
   }
 }
 
-async function deleteUser(id) {
-  try {
-    await client.query(
-      `
-      DELETE FROM users
-      WHERE id=$1;
-    `,
-      [id]
-    );
-  } catch (error) {
-    throw error;
-  }
-}
+// async function deleteUser(id) {
+//   try {
+//     await client.query(
+//       `
+//       DELETE FROM users
+//       WHERE id=$1;
+//     `,
+//       [id]
+//     );
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 module.exports = {
   createUser,
   getUser,
   getUserByUsername,
   updateUser,
-  deleteUser,
   getUserById,
   getAllUsers,
 
