@@ -15,6 +15,7 @@ async function getAllUsers() {
   }
 }
 
+//tested and passed
 async function createUser({ username, password, email, isAdmin }) {
 
   const SALT_COUNT = 10;
@@ -24,7 +25,7 @@ async function createUser({ username, password, email, isAdmin }) {
   if (!userToAdd.isAdmin){
     userToAdd.isAdmin = false
   }
-
+console.log("user", userToAdd)
   try {
     const {
       rows: [user],
