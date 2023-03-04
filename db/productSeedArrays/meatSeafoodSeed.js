@@ -55,15 +55,6 @@ const meatSeafoodProductsToCreate = [
       imageURL: "https://live.staticflickr.com/65535/49194247396_e087da9191_b.jpg"
     },
     {
-      name: "Chicken Livers",
-      description: "Tender and savory chicken livers.",
-      inventory: 80,
-      price: 7.99,
-      category: "Meat and Seafood",
-      subcategory: "Poultry",
-      imageURL: "https://live.staticflickr.com/65535/50183200297_3061b043db_b.jpgy"
-    },
-    {
       name: "Organic Chicken Breast",
       description: "Free-range chicken with exceptional flavor.",
       inventory: 50,
