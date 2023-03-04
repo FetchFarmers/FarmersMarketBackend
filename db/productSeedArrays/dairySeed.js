@@ -66,15 +66,6 @@ const dairyProductsToCreate = [
   imageURL: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/frbutter_food_nutrition_delicious-image-kybbyrka.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=7c1b7047c3754579f95a36898dc2180e"
 },
 {
-  name: "Garlic Butter",
-  description: "Organic garlic butter made from cream and garlic",
-  inventory: 50,
-  price: 4.99,
-  category: "Dairy",
-  subcategory: "Eggs & Butter",
-  imageURL: "https://live.staticflickr.com/5127/5225540338_44bbd701fe_b.jpg"
-},
-{
   name: "Sweet Cream Butter",
   description: "Organic sweet cream butter made from cream",
   inventory: 100,
@@ -164,15 +155,6 @@ const dairyProductsToCreate = [
   category: "Dairy",
   subcategory: "Cheese",
   imageURL: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Gruy%C3%A8re.jpg"
-},
-{
-  name: "White Cheddar",
-  description: "Sharp and tangy English cheese",
-  inventory: 75,
-  price: 7.99,
-  category: "Dairy",
-  subcategory: "Cheese",
-  imageURL: "https://pixnio.com/free-images/food-and-drink/cheese/white-cheddar-cheese-1150x863.jpg"
 },
 {
   name: "Cream Cheese",
