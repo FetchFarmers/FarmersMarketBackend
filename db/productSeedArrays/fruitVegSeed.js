@@ -21,7 +21,7 @@ const fruitVegProductsToCreate = [
   {
     name: "Blueberries", 
     description: "1 lb carton of fresh blueberries", 
-    inventory: 50, 
+    inventory: 40, 
     price: 4.99, 
     category: "Produce", 
     subcategory: "Fresh Fruits",
