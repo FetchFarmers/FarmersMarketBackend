@@ -39,7 +39,7 @@ async function getOrderById(id) {
     if (userOrderById){
       const { rows: orderProducts } = await client.query(
         `
-          SELECT products.id, products.name, products.description, products.price, order_products.id AS "orderProductId", 
+          SELECT products.id, products.name, products.description, products.price, products.inventory, order_products.id AS "orderProductId", 
           order_products."orderId", order_products.quantity, order_products."checkoutPrice" 
           FROM products 
           JOIN order_products ON order_products."productId" = products.id 
