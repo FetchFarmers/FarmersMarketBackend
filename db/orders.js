@@ -1,5 +1,6 @@
 const client = require('./client');
 const { updateOrderProductCheckoutPrice } = require('./order_products');
+const { updateProduct, getProductById } = require('./products');
 
 // * will return a new order for the userId provided // No API call
 // todo - still trying work out how the session Id will be generated 
@@ -316,7 +317,14 @@ async function checkoutOrder({ id, checkoutSum, checkoutDate }) {
     
     const orderToUpdate = await getOrderById(id)
 
-    await orderToUpdate.products.map((orderProduct) => { updateOrderProductCheckoutPrice(orderProduct.orderProductId, orderProduct.price)})
+    
+
+    await Promise.all(orderToUpdate.products.map((orderProduct) => { 
+      updateOrderProductCheckoutPrice(orderProduct.orderProductId, orderProduct.price);
+      const newInventory = orderProduct.inventory-orderProduct.quantity
+      console.log('newInventory :>> ', newInventory);
+      updateProduct(orderProduct.id, {"inventory": newInventory})
+    }))
       
     return await getOrderById(id)
   }catch(error){

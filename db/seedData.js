@@ -4,7 +4,7 @@ const client = require("./client")
 const {createUser} = require('./users');
 const {createProduct} = require('./products');
 const {createReview} = require('./reviews');
-const {createNewOrder, addProductToOrder} = require('./orders')
+const {createNewOrder, addProductToOrder, checkoutOrder} = require('./orders')
 const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCreate, bakeryProductsToCreate} = require('./productSeedArrays');
 
 
