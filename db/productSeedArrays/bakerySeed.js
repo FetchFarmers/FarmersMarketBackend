@@ -1,11 +1,11 @@
 const bakeryProductsToCreate = [
   {
-  name: "Artisanal Rye Bread",
+  name: "Rye Bread",
   description: "Our artisanal rye bread is made with traditional methods and has a delicious, tangy flavor. Great for sandwiches or toasting.",
   inventory: 20,
   price: 6.99,
   category: "Bakery",
-  subcategory: "Artisan Bread",
+  subcategory: "Bread",
   imageURL: "https://images.pexels.com/photos/6608542/pexels-photo-6608542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   },
   {
