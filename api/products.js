@@ -73,9 +73,9 @@ productsRouter.post('/', async (req, res, next) => {
   }
 });
 
-// PUT /api/products/:id
+// PATCH /api/products/:id
 // Updates an existing product with new data.
-productsRouter.put('/:id', async (req, res, next) => {
+productsRouter.patch('/:id', async (req, res, next) => {
   const { id } = req.params;
   const updates = req.body;
   try {
