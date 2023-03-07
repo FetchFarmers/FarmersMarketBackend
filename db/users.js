@@ -52,7 +52,7 @@ console.log("user", userToAdd)
   }
 }
 
-//passed test
+//passed test and incorporated Katherine's comments
 async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
@@ -63,14 +63,13 @@ async function getUser({ username, password }) {
       delete user.password;
       return user;
     } else if (!passwordsMatch) {
-      return;
-    } else {
-      throw Error("Error");
+      throw new Error('Passwords do not match');
     }
   } catch (error) {
     console.error(error);
   }
 }
+
 
  
 async function getUserById(userId) {
