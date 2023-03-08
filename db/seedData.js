@@ -59,7 +59,8 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       "userId" INTEGER REFERENCES users(id),
       "checkoutDate" VARCHAR(255), 
       "isCheckedOut" BOOLEAN DEFAULT false, 
-      "checkoutSum" DECIMAL (10,2)
+      "checkoutSum" DECIMAL (10,2),
+      "createdDate" VARCHAR(255) NOT NULL DEFAULT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')
     );
   
     CREATE TABLE order_products (
