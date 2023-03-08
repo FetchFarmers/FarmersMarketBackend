@@ -41,7 +41,7 @@ const client = require('./client');
 
     try {
   
-      await client.query(
+      const { rows: [updatedOrderProduct] } = await client.query(
         `
           UPDATE order_products
           SET quantity=${ quantity }
@@ -51,7 +51,7 @@ const client = require('./client');
       );
         
         
-    return await getOrderProductById(id)
+    return updatedOrderProduct
     }catch(error){
       throw error;
     }
@@ -103,7 +103,7 @@ const client = require('./client');
   // * should return true if the userId passed in matches the userId of the order associated with the passed in orderProductId 
   // ? I don't think we need this one because a session user should also be able to edit the order and they should only see their
   // ? order when clicking on the cart so if they see it they have the ability to edit it
-  async function canEditOrderProduct(orderProductId, userId) {
+  async function canEditOrderProduct(orderProductId) {
   
     try {
   

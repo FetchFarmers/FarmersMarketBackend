@@ -1,5 +1,5 @@
 const client = require('./client');
-const { updateOrderProductCheckoutPrice } = require('./order_products');
+const { updateOrderProductCheckoutPrice, getOrderProductById } = require('./order_products');
 const { updateProduct, getProductById } = require('./products');
 
 // * will return a new order for the userId provided // No API call
@@ -17,7 +17,7 @@ async function createNewOrder({sessionId, userId}) {
       [sessionId, userId]
     );
 
-    return await createdOrder;
+    return createdOrder;
   } catch (error) {
     throw error;
   }
@@ -371,7 +371,7 @@ async function addProductToOrder({sessionId, userId, productId, quantity}) {
     
         const orderId = openOrder[0].id
 
-        await client.query(
+        const { rows: [newOrderProduct] } = await client.query(
           `
             INSERT INTO order_products("orderId", "productId", quantity) 
             VALUES($1, $2, $3) 
@@ -380,7 +380,7 @@ async function addProductToOrder({sessionId, userId, productId, quantity}) {
           [orderId, productId, quantity]
         );
 
-        return await getOrderById(orderId);
+        return newOrderProduct
       
 
   } catch (error) {
