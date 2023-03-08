@@ -3,7 +3,7 @@ const { updateOrderProductCheckoutPrice, getOrderProductById } = require('./orde
 const { updateProduct, getProductById } = require('./products');
 
 // * will return a new order for the userId provided // No API call
-// todo - still trying work out how the session Id will be generated 
+
 async function createNewOrder({sessionId, userId}) {
   
   try {
@@ -62,7 +62,7 @@ async function getOrderById(id) {
 
       const { rows: orderProducts } = await client.query(
         `
-          SELECT products.id, products.name, products.description, products.price, order_products.id AS "orderProductId", 
+          SELECT products.id, products.name, products.description, products.price, products.inventory, order_products.id AS "orderProductId", 
           order_products."orderId", order_products.quantity, order_products."checkoutPrice" 
           FROM products 
           JOIN order_products ON order_products."productId" = products.id 
@@ -185,11 +185,81 @@ async function getOpenOrdersBySession({ sessionId }) {
   // * step 4 - does sessionId have an open order? yes(step 5) no(step 7)
   // * step 5 - add userId to db where sessionId continue to step 6
   // * step 6 - return open session order with associated user - stop
-  // * step 7 - open and return order with session and user details - stop
+  // * step 7 - return object saying no open orders - stop
+  // * step 8 - does sessionId have an open order? yes(step 9) no (step 10)
+  // * step 9 - return open session order - stop 
+  // * step 10 - return object saying no open orders - stop
+async function getOpenOrdersByUserInfo({ sessionId, userId }){
+
+  try{
+
+    if (userId) {
+      console.log("step 1")
+      const openUserOrder = await getOpenOrdersByUser({userId})
+      console.log("step 2")
+      if (openUserOrder[0]) {
+        console.log("step 3")
+        return openUserOrder;
+        
+      } else {
+
+        const openSessionOrder = await getOpenOrdersBySession ({sessionId})
+        console.log("step 4")
+        if (openSessionOrder[0]) {
+
+          console.log("step 5")
+          const { rows: [sessionOrderAddedToUser] } = await client.query(
+            `
+              UPDATE orders
+              SET "userId"=${ userId }
+              WHERE id=${ openSessionOrder[0].id }
+              RETURNING *;
+            `,
+          );
+          
+          console.log("step 6")
+          return await getOrderById(sessionOrderAddedToUser.id)
+
+        } else {
+          console.log("step 7")
+          return ({message: "No open orders"})
+          
+        }
+      }
+    } else {
+
+      const openSessionOrder = await getOpenOrdersBySession({sessionId}) 
+      console.log("step 8")
+
+      if (openSessionOrder[0]) {
+        console.log("step 9")
+        return openSessionOrder;
+
+      } else {
+        console.log("step 10")
+        return ({message: "No open orders"})
+
+      }
+
+    }
+
+  } catch(error) {
+    throw(error)
+  }
+}
+
+// * manually tested all components - see notes below
+  // * step 1 - is there a passed in userId? yes(step 2) no(step 8)
+  // * step 2 - does userId have an open order? yes(step 3) no(step 4)
+  // * step 3 - return open user order - stop
+  // * step 4 - does sessionId have an open order? yes(step 5) no(step 7)
+  // * step 5 - add userId to db where sessionId continue to step 6
+  // * step 6 - return open session order with associated user - stop
+  // * step 7 - return order with session and user details - stop
   // * step 8 - does sessionId have an open order? yes(step 9) no (step 10)
   // * step 9 - return open session order - stop 
   // * step 10 - open and return order with session details - stop
-async function getOpenOrdersByUserInfo({ sessionId, userId }){
+async function getOrCreateOpenOrdersByUserInfo({ sessionId, userId }){
 
   try{
 
@@ -365,7 +435,7 @@ async function addProductToOrder({sessionId, userId, productId, quantity}) {
 
   try {
 
-    const openOrder = await getOpenOrdersByUserInfo({sessionId, userId})
+    const openOrder = await getOrCreateOpenOrdersByUserInfo({sessionId, userId})
     console.log("🚀 ~ file: orders.js:361 ~ addProductToOrder ~ openOrder:", openOrder)
     
     
@@ -393,6 +463,7 @@ module.exports = {
 createNewOrder,
 getOrderById,
 getOpenOrdersByUserInfo,
+getOrCreateOpenOrdersByUserInfo,
 getAllClosedOrders,
 getAllOpenOrders,
 getOpenOrdersByUser,
