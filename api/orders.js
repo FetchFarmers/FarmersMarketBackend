@@ -48,7 +48,7 @@ ordersRouter.get("/open", async (req, res, next) => {
 
 // * P api/orders/user/open - to get open order for user
 // ? working without user but only tested for passed in user by hard coding in the user data so not sure if it fully works
-ordersRouter.get("/user/open", async (req, res, next) => {
+ordersRouter.post("/user/open", async (req, res, next) => {
 
     if (req.user) {
         req.body.userId = req.user.id
