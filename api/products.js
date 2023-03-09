@@ -1,5 +1,5 @@
 const express = require('express');
-const { requireUser } = require('./utils');
+const { requireAdmin } = require('./utils');
 
 const productsRouter = express.Router();
 const { 
@@ -61,7 +61,8 @@ productsRouter.get('/subcategory/:subcategory', async (req, res, next) => {
 
 // POST /api/products
 // Creates a new product with the given data.
-productsRouter.post('/', async (req, res, next) => {
+// Requires admin
+productsRouter.post('/', requireAdmin, async (req, res, next) => {
   const productData = req.body;
   console.log(req.body);
   console.log(productData);
@@ -71,11 +72,12 @@ productsRouter.post('/', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+})
 
 // PATCH /api/products/:id
 // Updates an existing product with new data.
-productsRouter.patch('/:id', async (req, res, next) => {
+// Requires admin
+productsRouter.patch('/:id', requireAdmin, async (req, res, next) => {
   const { id } = req.params;
   const updates = req.body;
   try {
@@ -88,7 +90,8 @@ productsRouter.patch('/:id', async (req, res, next) => {
 
 // DELETE /api/products/:id
 // Deletes a product from the database by its ID.
-productsRouter.delete('/:id', async (req, res, next) => {
+// Requires admin
+productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
   const { id } = req.params;
   try {
     await deleteProduct(id);
