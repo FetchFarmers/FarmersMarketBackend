@@ -24,6 +24,18 @@ productsRouter.get('/', async (req, res, next) => {
   }
 });
 
+//Include a search endpoint that accepts a search query as a parameter.
+productsRouter.get('/search', async (req, res, next) => {
+  const searchQuery = req.query.q;
+  console.log('Type of', typeof req.query)
+  try {
+    const products = await searchProducts(searchQuery);
+    res.send(products);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // GET /api/products/:id
 // Retrieves a single product by its ID.
 productsRouter.get('/:id', async (req, res, next) => {
@@ -102,16 +114,5 @@ productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
   }
 });
 
-//Include a search endpoint that accepts a search query as a parameter
-
-productsRouter.get('/search', async (req, res, next) => {
-  const searchQuery = req.query.q;
-  try {
-    const products = await searchProducts(searchQuery);
-    res.send(products);
-  } catch (error) {
-    next(error);
-  }
-});
 
 module.exports = productsRouter;

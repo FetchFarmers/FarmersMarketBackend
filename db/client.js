@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const connectionString = process.env.DATABASE_URL //|| 'https://localhost:5432/fetch_farm';
+const connectionString = process.env.DATABASE_URL || 'https://localhost:5432/fetch_farm';
 
 const client = new Pool({
   connectionString,
