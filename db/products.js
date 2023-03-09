@@ -98,7 +98,6 @@ async function deleteProduct(id) {
 
 async function searchProducts(searchQuery) {
   try {
-    // console.log(searchQuery)
     const regexQuery = `%${searchQuery}%`; // create search query using % wildcards for partial matches
     const { rows: products } = await client.query(`
       SELECT *

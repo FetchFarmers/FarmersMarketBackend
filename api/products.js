@@ -27,7 +27,6 @@ productsRouter.get('/', async (req, res, next) => {
 //Include a search endpoint that accepts a search query as a parameter.
 productsRouter.get('/search', async (req, res, next) => {
   const searchQuery = req.query.q;
-  console.log('Type of', typeof req.query)
   try {
     const products = await searchProducts(searchQuery);
     res.send(products);
