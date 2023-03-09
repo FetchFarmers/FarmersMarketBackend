@@ -96,6 +96,20 @@ async function deleteProduct(id) {
   }
 }
 
+async function searchProducts(searchQuery) {
+  try {
+    const regexQuery = `%${searchQuery}%`; // create search query using % wildcards for partial matches
+    const { rows: products } = await client.query(`
+      SELECT *
+      FROM products
+      WHERE name ILIKE $1 OR description ILIKE $1 OR category ILIKE $1 OR subcategory ILIKE $1;
+    `, [regexQuery]); // search for products that match the search query using ILIKE operator
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getProducts,
   getProductById,
@@ -103,5 +117,6 @@ module.exports = {
   getProductsBySubcategory,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  searchProducts
 };
