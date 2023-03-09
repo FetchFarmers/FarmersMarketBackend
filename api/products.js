@@ -9,7 +9,8 @@ const {
   getProductsBySubcategory, 
   createProduct, 
   updateProduct, 
-  deleteProduct 
+  deleteProduct,
+  searchProducts
 } = require('../db');
 
 // GET /api/products
@@ -96,6 +97,18 @@ productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
   try {
     await deleteProduct(id);
     res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//Include a search endpoint that accepts a search query as a parameter
+
+productsRouter.get('/search', async (req, res, next) => {
+  const searchQuery = req.query.q;
+  try {
+    const products = await searchProducts(searchQuery);
+    res.send(products);
   } catch (error) {
     next(error);
   }
