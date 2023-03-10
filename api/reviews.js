@@ -26,7 +26,7 @@ reviewsRouter.post('/:productId/reviews', requireUser, async (req, res, next) =>
   const { user } = req;
 
   try {
-    const review = await createReview( { productId, title, details, starRating, userId: user.id });
+    const review = await createReview( { productId, userId: user.id, title, details, starRating  });
     res.send(review);
   } catch (error) {
     next(error);
@@ -34,3 +34,4 @@ reviewsRouter.post('/:productId/reviews', requireUser, async (req, res, next) =>
 });
 
 module.exports = reviewsRouter;
+
