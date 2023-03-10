@@ -154,6 +154,46 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
     }
   }
 
+  async function createInitialReviews() {
+    try {
+      console.log("Starting to create reviews...");
+  
+      const reviewData = [
+        {
+          productId: 1,
+          userId: 1,
+          title: "Delicious!",
+          details: "I loved this product, it was so fresh and flavorful.",
+          starRating: 5,
+        },
+        {
+          productId: 1,
+          userId: 2,
+          title: "Not my favorite",
+          details: "I wasn't a big fan of this product, it was too sweet for my taste.",
+          starRating: 3,
+        },
+        {
+          productId: 2,
+          userId: 3,
+          title: "Great quality",
+          details: "I was really impressed with the quality of this product, it was definitely worth the price.",
+          starRating: 4,
+        },
+        // Add more review data here
+      ];
+  
+      const reviews = await Promise.all(reviewData.map(createReview));
+      console.log("🚀 ~ file: seedData.js ~ createInitialReviews ~ reviews", reviews);
+  
+      console.log("Finished creating reviews!");
+    } catch (error) {
+      console.error("Error creating reviews!");
+      throw error;
+    }
+  }
+  
+
   // ! we need to set the review data seed pages and fill in the .map( ) argument with the function made to create a review
   async function createInitialReviews() {
   //   console.log("Starting to create reviews...")
