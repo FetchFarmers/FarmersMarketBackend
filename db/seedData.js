@@ -195,7 +195,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
   
 
   // ! we need to set the review data seed pages and fill in the .map( ) argument with the function made to create a review
-  async function createInitialReviews() {
+  // async function createInitialReviews() {
   //   console.log("Starting to create reviews...")
   //   try {
 
@@ -227,8 +227,8 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
   //   } catch (error) {
   //     console.error("Error creating reviews!")
   //     throw error
-  //   }
-  }
+  // //   }
+  // }
 
   async function createInitialOrders() {
     console.log("Starting to create reviews...")
@@ -324,7 +324,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       await createInitialProducts()
       await createInitialOrders()
       await createInitialOrderProducts()
-      // await createInitialReviews()
+      await createInitialReviews()
     } catch (error) {
       console.log("Error during rebuildDB")
       throw error
