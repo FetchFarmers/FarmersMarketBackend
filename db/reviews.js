@@ -17,13 +17,13 @@ async function getAllReviewsByProductId(productId) {
 }
 
 // Create a new review for a product
-async function createReview({ productId, title, details, starRating, userId}) {
+async function createReview({ productId, userId, title, details, starRating }) {
   try {
     const { rows: [review] } = await client.query(`
-      INSERT INTO reviews ("productId", title, details, "starRating", "userId" )
+      INSERT INTO reviews ("productId", "userId", title, details, "starRating" )
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *
-    `, [ productId, title, details, starRating, userId]);
+    `, [ productId, userId, title, details, starRating ]);
 
     return review;
   } catch (error) {
