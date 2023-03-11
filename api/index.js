@@ -56,10 +56,9 @@ router.post("/create-payment-intent", async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "USD",
       amount: checkoutPrice,
-      payment_methods: cards,
+      automatic_payment_methods: { enabled: true },
     });
 
-    // Send publishable key and PaymentIntent details to client
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
