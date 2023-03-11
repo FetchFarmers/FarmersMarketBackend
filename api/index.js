@@ -3,13 +3,18 @@ const router = express.Router();
 
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, STRIPE_SECRET_KEY } = process.env;
 
-// * GET /api/health - Passing test
+
 router.get('/farm', async (req, res, next) => {
     res.send ({message: "Welcome to the site to fetch_farmers"})
     next;
 });
+
+const stripe = require("stripe")(STRIPE_SECRET_KEY, {
+  apiVersion: "2022-08-01",
+});
+
  
 // This will run before all of the routers and get the user if token is received. It will store the user as req.user
 router.use(async (req, res, next) => {
@@ -37,6 +42,33 @@ router.use(async (req, res, next) => {
             message: `Authorization token must start with ${ prefix }`
         });
     }
+});
+
+router.get("/config", (req, res) => {
+  res.send({
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+  });
+});
+
+router.post("/create-payment-intent", async (req, res) => {
+  const { checkoutPrice } = req.body
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      currency: "USD",
+      amount: checkoutPrice,
+      automatic_payment_methods: { enabled: true },
+    });
+
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      error: {
+        message: e.message,
+      },
+    });
+  }
 });
 
 
