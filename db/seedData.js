@@ -60,7 +60,10 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       "checkoutDate" VARCHAR(255), 
       "isCheckedOut" BOOLEAN DEFAULT false, 
       "checkoutSum" DECIMAL (10,2),
-      "createdDate" VARCHAR(255) NOT NULL DEFAULT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')
+      "ifFulfilled" BOOLEAN DEFAULT false, 
+      "fulfilledBy" VARCHAR(255),
+      "fulfilledDate" VARCHAR(255),
+      "createdDate" VARCHAR(255) NOT NULL DEFAULT TO_CHAR(NOW() :: DATE, 'mm/dd/yyyy')
     );
   
     CREATE TABLE order_products (

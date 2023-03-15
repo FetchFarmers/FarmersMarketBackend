@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { requireUser, requireAdmin} = require("./utils.js");
 const { getUserByUsername, createUser, getUser, 
-  getAllUsers, updateUser} = require("../db");
+  getAllUsers, updateUser, getUserById} = require("../db");
 
 const usersRouter = express.Router();
 
@@ -86,7 +86,8 @@ usersRouter.post("/login", async (req, res, next) => {
 usersRouter.get("/me", requireUser, async (req, res, next) => {
   try {
     if (req.user) {
-      res.send(req.user);
+      const user = await getUserById(req.user.id)
+      res.send(user)
     }
   } catch (err) {
     console.log(err.message);
