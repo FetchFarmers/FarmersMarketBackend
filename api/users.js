@@ -126,7 +126,7 @@ usersRouter.get("/", requireAdmin, async (req, res, next) => {
 
 
 
-usersRouter.put('/me', requireUser, async (req, res, next) => {
+usersRouter.patch('/update/me', requireUser, async (req, res, next) => {
   try {
     const updatedUser = await updateUser(req.user.id, req.body);
     res.send(updatedUser);
