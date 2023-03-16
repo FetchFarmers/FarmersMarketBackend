@@ -126,6 +126,7 @@ async function updateUser(id, updates) {
     `,
       values
     );
+    delete user.password
     return user;
   } catch (error) {
     throw error;
