@@ -218,7 +218,7 @@ async function getOpenOrdersByUserInfo({ sessionId, userId }){
           );
           
           console.log("step 6")
-          return await getOrderById(sessionOrderAddedToUser.id)
+          return await [getOrderById(sessionOrderAddedToUser.id)]
 
         } else {
           console.log("step 7")
