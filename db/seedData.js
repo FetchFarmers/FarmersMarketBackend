@@ -1,10 +1,9 @@
 const client = require("./client")
 
-// ! remember to destructure your DB adapter functions here so we can use them to seed the DB //
 const {createUser} = require('./users');
 const {createProduct} = require('./products');
 const {createReview} = require('./reviews');
-const {createNewOrder, addProductToOrder, checkoutOrder} = require('./orders')
+const {createNewOrder, addProductToOrder} = require('./orders')
 const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCreate, bakeryProductsToCreate} = require('./productSeedArrays');
 
 
@@ -99,29 +98,34 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
     try {
 
       const usersToCreate = [
-        { username: "catherine", 
+        { 
+          username: "catherine", 
           password: "dairy",
           email: "catherine.mugnaI@gmail.com", 
           isAdmin: true, 
         },        
-        { username: "hollye", 
-        password: "fruit&veg",
-        email: "hollyekedge@gmail.com", 
-        isAdmin: true, 
+        { 
+          username: "hollye", 
+          password: "fruit&veg",
+          email: "hollyekedge@gmail.com", 
+          isAdmin: true, 
         },
-        { username: "meanith", 
-        password: "bakery",
-        email: "huon.meanith@gmail.com", 
-        isAdmin: true, 
+        { 
+          username: "meanith", 
+          password: "bakery",
+          email: "huon.meanith@gmail.com", 
+          isAdmin: true, 
         },
-        { username: "amandatang", 
-        password: "wagyu",
-        email: "amandaltang13@gmail.com", 
-        isAdmin: true, 
+        { 
+          username: "amandatang", 
+          password: "wagyu",
+          email: "amandaltang13@gmail.com", 
+          isAdmin: true, 
         },
-        { username: "Joseph", 
-        password: "test123456",
-        email: "test@gmail.com",
+        { 
+          username: "Joseph", 
+          password: "test123456",
+          email: "test@gmail.com",
         }
       ]
       const users = await Promise.all(usersToCreate.map(createUser))
@@ -183,7 +187,6 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
           details: "I was really impressed with the quality of this product, it was definitely worth the price.",
           starRating: 4,
         },
-        // Add more review data here
       ];
   
       const reviews = await Promise.all(reviewData.map(createReview));
@@ -196,43 +199,6 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
     }
   }
   
-
-  // ! we need to set the review data seed pages and fill in the .map( ) argument with the function made to create a review
-  // async function createInitialReviews() {
-  //   console.log("Starting to create reviews...")
-  //   try {
-
-  //     const reviewsToCreate = [
-  //       {
-  //         productId: "",
-  //         userId: "",
-  //         title: "",
-  //         details: "",
-  //         starRating: ""
-  //       },        {
-  //         productId: "",
-  //         userId: "",
-  //         title: "",
-  //         details: "",
-  //         starRating: ""
-  //       },        {
-  //         productId: "",
-  //         userId: "",
-  //         title: "",
-  //         details: "",
-  //         starRating: ""
-  //       }
-  //     ]
-  //     const reviews = await Promise.all(reviewsToCreate.map())
-      
-  //     console.log("🚀 ~ file: seedData.js ~ createInitialReviews ~ reviews created:", reviews)
-  //     console.log("Finished creating reviews!")
-  //   } catch (error) {
-  //     console.error("Error creating reviews!")
-  //     throw error
-  // //   }
-  // }
-
   async function createInitialOrders() {
     console.log("Starting to create reviews...")
     try {
@@ -240,7 +206,6 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
       const ordersToCreate = [
         {
           sessionId: "5698abc", 
-          userId: 5,
         },
         {
           sessionId: "5648hth",
@@ -301,7 +266,7 @@ const {fruitVegProductsToCreate, dairyProductsToCreate, meatSeafoodProductsToCre
           quantity: 3,
         },
         {
-          userId: 5,
+          sessionId: "5698abc",
           productId: 62,
           quantity: 1,
         },
