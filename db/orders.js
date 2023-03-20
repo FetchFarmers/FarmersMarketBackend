@@ -1,6 +1,6 @@
 const client = require('./client');
-const { updateOrderProductCheckoutPrice, getOrderProductById } = require('./order_products');
-const { updateProduct, getProductById } = require('./products');
+const { updateOrderProductCheckoutPrice } = require('./order_products');
+const { updateProduct } = require('./products');
 
 // * will return a new order for the userId provided // No API call
 
@@ -218,7 +218,8 @@ async function getOpenOrdersByUserInfo({ sessionId, userId }){
           );
           
           console.log("step 6")
-          return await [getOrderById(sessionOrderAddedToUser.id)]
+          const guestOrderToUserOrder = await getOrderById(sessionOrderAddedToUser.id)
+          return [guestOrderToUserOrder]
 
         } else {
           console.log("step 7")
